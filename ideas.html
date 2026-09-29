@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IDEAS — The Zero-Budget Guitar Software Bank</title>
+<style>
+  :root{
+    --bg:#0b0e13; --panel:#12161d; --panel2:#161b24; --line:#222a36;
+    --txt:#d7dde5; --dim:#8b98a9; --gold:#f0b64a; --teal:#58c4b7; --red:#e07a7a; --green:#7bd88f;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.55;font-size:15.5px}
+  a{color:var(--teal);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:48px 0 28px;border-bottom:1px solid var(--line);
+    background:radial-gradient(900px 380px at 18% -10%,rgba(240,182,74,.10),transparent 60%),
+               radial-gradient(700px 340px at 85% 0%,rgba(88,196,183,.10),transparent 55%)}
+  .chip{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+    color:var(--gold);border:1px solid rgba(240,182,74,.45);border-radius:999px;padding:5px 12px;margin-bottom:18px}
+  h1{font-size:clamp(34px,5.4vw,56px);margin:0 0 6px;letter-spacing:-.02em}
+  h1 .thin{color:var(--dim);font-weight:300}
+  .sub{color:var(--dim);font-size:17px;max-width:760px;margin:0 0 22px}
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 26px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+  .stat b{display:block;font-size:20px;color:var(--gold);font-family:var(--mono)}
+  .stat span{font-size:12px;color:var(--dim);letter-spacing:.05em;text-transform:uppercase}
+
+  /* ---------- shells ---------- */
+  section{padding:38px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(22px,3vw,30px);margin:0 0 6px;letter-spacing:-.01em}
+  h2 .hs{color:var(--dim);font-family:var(--mono);font-size:14px;display:block;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+  h3{font-size:18px;margin:26px 0 10px}
+  .lead{color:var(--dim);max-width:860px;margin:0 0 20px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+
+  /* ---------- nav ---------- */
+  nav.toc{position:sticky;top:0;z-index:50;background:rgba(11,14,19,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);padding:9px 0}
+  nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;white-space:nowrap;scrollbar-width:thin}
+  nav.toc a{font-size:12.5px;color:var(--dim);border:1px solid transparent;padding:4px 10px;border-radius:999px}
+  nav.toc a:hover{color:var(--txt);border-color:var(--line);text-decoration:none}
+
+  /* ---------- rules ---------- */
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:16px 0}
+  .rule{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .rule b{color:var(--teal)}
+  .rule .n{font-family:var(--mono);color:var(--gold);font-size:12.5px;letter-spacing:.1em}
+
+  /* ---------- deep dives ---------- */
+  .deep{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+    border-radius:16px;padding:20px 22px;margin:16px 0}
+  .deep h3{margin:0 0 2px;font-size:20px}
+  .deep .id{font-family:var(--mono);color:var(--gold);font-size:12.5px;letter-spacing:.12em}
+  .deep dl{margin:12px 0 0;display:grid;grid-template-columns:150px 1fr;gap:6px 14px}
+  .deep dt{color:var(--gold);font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}
+  .deep dd{margin:0;color:var(--txt)}
+  .deep dd.dim{color:var(--dim)}
+  @media(max-width:640px){.deep dl{grid-template-columns:1fr}.deep dt{padding-top:10px}}
+
+  /* ---------- catalog ---------- */
+  .searchbar{display:flex;gap:10px;align-items:center;margin:16px 0 6px;flex-wrap:wrap}
+  .searchbar input{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    color:var(--txt);padding:11px 14px;font-size:15px;font-family:var(--sans);outline:none}
+  .searchbar input:focus{border-color:rgba(240,182,74,.5)}
+  .hint{color:var(--dim);font-size:12.5px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;margin:14px 0 4px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card .head{display:flex;gap:9px;align-items:baseline;margin-bottom:5px}
+  .card .num{font-family:var(--mono);font-size:12px;color:var(--gold);background:rgba(240,182,74,.08);
+    border:1px solid rgba(240,182,74,.28);border-radius:6px;padding:1px 7px;white-space:nowrap}
+  .card .name{font-weight:600}
+  .card p{margin:0;color:var(--dim);font-size:14px}
+  .card p b{color:var(--txt);font-weight:600}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+    border:1px solid var(--line);border-radius:999px;padding:1px 7px;color:var(--dim);margin-left:6px;vertical-align:1px}
+  .tag.star{color:var(--gold);border-color:rgba(240,182,74,.4)}
+  .tag.warn{color:var(--red);border-color:rgba(224,122,122,.45)}
+  .tag.free{color:var(--green);border-color:rgba(123,216,143,.4)}
+  .cat-intro{color:var(--dim);max-width:880px;margin:4px 0 6px}
+  .cat-intro b{color:var(--txt)}
+
+  /* ---------- tables ---------- */
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--gold);font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+  td .num{font-family:var(--mono);color:var(--gold);font-size:12px}
+  tr:hover td{background:rgba(255,255,255,.015)}
+
+  /* ---------- misc ---------- */
+  .callout{border-left:3px solid var(--gold);background:rgba(240,182,74,.05);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}
+  .callout.red{border-left-color:var(--red);background:rgba(224,122,122,.05)}
+  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  ul.clean{padding-left:18px;color:var(--dim)}
+  ul.clean b{color:var(--txt)}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--teal)}
+  footer{padding:34px 0 60px;color:var(--dim)}
+  footer .big{color:var(--txt);font-size:17px;max-width:820px}
+  .kbd{font-family:var(--mono);font-size:12px;color:var(--dim)}
+  mark{background:rgba(240,182,74,.25);color:var(--txt);padding:0 3px;border-radius:3px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="chip">PC SOFTWARE &middot; WEB APP + DESKTOP APP</span>
+    <h1>IDEAS <span class="thin">/ the zero-budget bank</span></h1>
+    <p class="sub">236 guitar software ideas — invented, researched, filtered to the ones you can actually build with <b>€0</b>: no paid tools, no licenses, no hardware, no servers. Each idea explained, with what it is, how it works, and where money comes later.</p>
+    <div class="stats">
+      <div class="stat"><b>236</b><span>ideas invented</span></div>
+      <div class="stat"><b>23</b><span>parked (need money)</span></div>
+      <div class="stat"><b>~210</b><span>live &amp; buildable at €0</span></div>
+      <div class="stat"><b>12</b><span>deep dives below</span></div>
+    </div>
+
+    <div class="panel">
+      <h3 style="margin-top:0">What this is — and how it ships</h3>
+      <p style="margin:0 0 10px"><b>What it is:</b> a filtered catalog of software products for guitar players, producers and teachers. It came from a full survey of the guitar app, website and plugin landscape (parts 1–4 of the research), then passed through one hard filter: <b>the €0 rule</b>. If an idea can't be built and launched with zero money, it's not on the live list — it's in the parked table with the reason why.</p>
+      <p style="margin:0 0 10px"><b>How it ships — the format, named properly:</b> every live idea is <b>PC software</b>, built in two shapes from one codebase:</p>
+      <ul class="clean" style="margin:0 0 10px">
+        <li><b>Web App</b> — open a link in your browser. Nothing to install, works on Windows, macOS and Linux, instant updates, zero distribution cost.</li>
+        <li><b>Desktop App</b> — install it on your PC. Runs fully offline, keeps your files on your own machine, no server bills for the builder.</li>
+      </ul>
+      <p style="margin:0"><b>Why desktop matters here:</b> guitar software works with audio, and audio belongs on your machine. A local-first desktop app can process stems, practice audio, tabs and recordings without anyone paying for cloud compute — which is exactly how these ideas stay free to build and free to run.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#rules">The €0 rules</a>
+  <a href="#deep">★ Deep dives</a>
+  <a href="#practice">Practice</a>
+  <a href="#tabs">Tabs &amp; notation</a>
+  <a href="#ear">Ear &amp; rhythm</a>
+  <a href="#tone">Tone &amp; gear</a>
+  <a href="#writing">Songwriting</a>
+  <a href="#backing">Backing tracks</a>
+  <a href="#jamming">Jamming &amp; bands</a>
+  <a href="#teaching">Teaching</a>
+  <a href="#luthiers">Luthiers &amp; collectors</a>
+  <a href="#social">Social</a>
+  <a href="#plugins">Plugins</a>
+  <a href="#trust">Trust &amp; standards</a>
+  <a href="#extra">Constraint-born</a>
+  <a href="#parked">Parked list</a>
+  <a href="#stack">€0 stack</a>
+  <a href="#costs">Costs later</a>
+</div></nav>
+
+<!-- ================= RULES ================= -->
+<section id="rules"><div class="wrap">
+  <h2><span class="hs">Section 01</span>The €0 rules — how the cut was made</h2>
+  <p class="lead">Three rules. An idea survives only if it passes all three. Everything else is parked, not deleted — the parked table tells you exactly what to avoid until money exists.</p>
+  <div class="rules">
+    <div class="rule"><span class="n">RULE 1</span><br><b>Build with free tools only.</b><br>Open source, free tiers, on-device processing. No paid APIs, no GPU rentals, no paid plugins, no hardware purchases, no sample-library budgets.</div>
+    <div class="rule"><span class="n">RULE 2</span><br><b>Launch with €0.</b><br>Free hosting (GitHub Pages, Cloudflare, Vercel free tier), free subdomain. Web/PWA/desktop first — the $99/year app-store accounts and €10 domains can wait until revenue exists.</div>
+    <div class="rule"><span class="n">RULE 3</span><br><b>No licensed content.</b><br>Everything the product touches must be: yours, public domain, crowd-sourced, or the user's own files. This single rule kills every copyright problem before it starts.</div>
+  </div>
+  <div class="callout"><b>The plugin extra-rules:</b> build with iPlug2 (MIT) or DPF (ISC) — not commercial JUCE. Ship VST3 + CLAP + LV2, skip AAX. No iLok. CPU inference only (NAM "nano/feather" architectures run on CPU). Capture training via TONE3000's free cloud trainer — never rent a GPU. Distribute from your own page + free storefronts (fees only when you actually sell).</div>
+  <p class="hint">Legend: <span class="tag star">★ top pick</span> <span class="tag warn">⚠ reshaped / caveat</span> <span class="tag free">€0</span></p>
+</div></section>
+
+<!-- ================= DEEP DIVES ================= -->
+<section id="deep"><div class="wrap">
+  <h2><span class="hs">Section 02</span>★ The twelve deep dives</h2>
+  <p class="lead">The best twelve ideas for a zero-budget builder, explained properly: what it is, how it works, why it costs nothing, who pays later, and the first step.</p>
+
+  <div class="deep">
+    <span class="id">#131 &middot; COLLECTORS &amp; LUTHIERS</span>
+    <h3>Repair Diagnostic Wizard <span class="tag star">★ best first project</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>A guided troubleshooter for guitar problems. You describe a symptom — "it buzzes on the 7th fret of the G string only when I bend, and only on the low E" — and it walks a decision tree to likely causes (relief, high fret, nut slot, saddle, pickup height, technique), ranked by probability, with a fix order and cost estimates.</dd>
+      <dt>Why it's deep</dt><dd>Millions of searches a year for "guitar buzz" alone. The answers exist but are scattered across forums written in 2009 by people arguing. Nobody has structured the knowledge into one calm, correct flow. That's the whole product: structured knowledge, beautifully presented.</dd>
+      <dt>How it works</dt><dd>A static site with a branching logic tree + measurement guides (feeler-gauge equivalents using a credit card, ruler, phone camera). Content is written once and refined by user feedback. No backend needed at launch — pure HTML/JS.</dd>
+      <dt>Why it's €0</dt><dd>It's content and logic. Hosting on Cloudflare/GitHub Pages free tier. No audio, no licenses, no inventory, no APIs. The single cheapest idea in the bank to build.</dd>
+      <dt>Money later</dt><dd>Affiliate links to parts and tools (saddles, files, gauges), paid lead-gen to local luthiers ("matched a repair shop"), a Pro version with saved instrument profiles, and later the luthier-facing tools (#137/#138).</dd>
+      <dt>First step</dt><dd>Write the 12 most-searched symptom → cause trees this week. Ship 3 of them. Watch which ones get shared.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#27 &middot; TABS &amp; NOTATION</span>
+    <h3>Public-Domain Songbook Generator <span class="tag star">★ legally bulletproof</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>A generator that turns public-domain music into beautiful, playable guitar arrangements: tab, standard notation, chord diagrams and audio playback. Feed it a traditional tune, a hymn, a folk song, a classical piece — out comes a clean arrangement a beginner can actually play.</dd>
+      <dt>Why it's deep</dt><dd>Every tab site in the world lives under a copyright cloud — most of their content is user transcriptions of protected songs. Public domain is the one pool of music where you can build forever without asking anyone for permission. Thousands of folk songs, hymns, Christmas carols, Renaissance and classical pieces are free to use and re-arrange.</dd>
+      <dt>How it works</dt><dd>Sources like Mutopia, IMSLP and old hymnals (all PD) feed a pipeline: parse the tune → arrange for guitar (melody + simple bass/chords, multiple difficulty levels) → render via alphaTab (open-source tab rendering/playback) → synthesize audio with FluidSynth + CC0 soundfonts. All open source, all local.</dd>
+      <dt>Why it's €0</dt><dd>PD content + open-source tools + static generation. You literally own the output and can give it away forever.</dd>
+      <dt>Money later</dt><dd>Print-on-demand songbooks (no inventory), Pro features (custom arrangements, transposition, difficulty personalization), bulk licensing to teachers and schools (#125/#130).</dd>
+      <dt>First step</dt><dd>Pick one category (Christmas carols or fiddle tunes), ship 50 arrangements with audio, publish the generator so people see the engine.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#209 &middot; PLUGINS — CAPTURES</span>
+    <h3>Device-Targeted Capture Optimizer <span class="tag star">★ perfect timing</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>Tool that takes a NAM (Neural Amp Modeler) capture and whips it into the exact shape a specific piece of hardware needs — Hotone, Valeton, HeadRush, ToneX-class pedals — with a quality report before you load it: fidelity loss, latency footprint, CPU profile, and an A/B preview.</dd>
+      <dt>Why it's deep</dt><dd>The NAM ecosystem exploded in 2026: free open-source architecture, 700,000+ captures, and hardware makers rushing to support it (HeadRush, Hotone, Valeton, Blackstar). Every device wants a slightly different variant, and vendors ship one-off converters if anything at all. A cross-device optimizer with quality reporting is the missing middleware — and the wave is happening right now, not in two years.</dd>
+      <dt>How it works</dt><dd>NAM is MIT-licensed and the file format is open, so you can parse and re-target captures. Downscale architectures (A2 → "nano"/"feather" variants), normalize levels against a reference DI, and validate by running the model and comparing output statistics. Desktop app (offline, CPU-only).</dd>
+      <dt>Why it's €0</dt><dd>Open format, free trainer (TONE3000 cloud), no server needed — processing happens on the user's machine. Distributed free or via free storefronts.</dd>
+      <dt>Money later</dt><dd>Pro tier for creators (batch optimization + quality badges), partnerships with pedal makers who want "verified working on our device" content, and a marketplace of validated packs.</dd>
+      <dt>First step</dt><dd>Build a CLI that reads a .nam file and outputs the correct downscaled variant for one device. Prove one device end-to-end. Then add the A/B report UI.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#219 &middot; PLUGINS — WORKFLOW</span>
+    <h3>AI-Tab Fidelity Checker <span class="tag star">★ rides the AI wave</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>A validator for AI-generated guitar tabs and notation. Feed it (a) the audio, (b) the AI's tab output — from Klangio, Songscription, AnthemScore, Melodyne, anything. It scores two things: <b>accuracy</b> (does the tab match the audio note-by-note?) and <b>playability</b> (can a human actually play it — fret spans, position jumps, string choices), then auto-suggests repairs.</dd>
+      <dt>Why it's deep</dt><dd>2025–26 flooded the market with AI transcribers. They're fast and impressive and <em>wrong in ways that matter</em>: phantom notes, unplayable stretches, rhythm that doesn't line up. Everyone who uses them needs a check step, and nobody sells one. Being the "spell-check of AI tabs" is a defensible position in a category where the transcribers themselves will never point out their own errors.</dd>
+      <dt>How it works</dt><dd>Score the tab against the audio using alignment + pitch/onset comparison (free tools: Basic Pitch, librosa-style analysis). Then apply guitar-logic rules: max fret span per hand size, position-transition costs, string-choice heuristics. Output a per-bar heatmap + suggested fixes. Local desktop app; the user brings their own files.</dd>
+      <dt>Why it's €0</dt><dd>User-supplied files (Rule 3 — you never host copyrighted content), open-source analysis, on-device processing.</dd>
+      <dt>Money later</dt><dd>Freemium (fixes beyond the first N per song), an API for tab sites and teachers to auto-vet submissions, and teacher bundles.</dd>
+      <dt>First step</dt><dd>Take 10 songs where you know the ground truth, run three AI transcribers, and measure how they fail. That failure taxonomy is the product spec.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#89 &middot; BACKING TRACKS</span>
+    <h3>Generated Backing Tracks <span class="tag star">★ the flagship</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>Type in your chords (or import a chart), pick a style, tempo and feel — out comes a studio-ish backing band: drums, bass, keys, optional rhythm guitar. Count-ins, fills, sections (verse/chorus/bridge), key changes on demand. The user <b>owns the output</b>.</dd>
+      <dt>Why it's deep</dt><dd>Everyone practices with backing tracks; almost all of it is either unlicensed (YouTube loops), expensive per-track, or wrong for your song (fixed loops in a random key). Generated-for-you tracks solve all three — and they carry <b>zero</b> copyright exposure, because the audio is made from scratch for this user, not copied from a record.</dd>
+      <dt>How it works</dt><dd>Procedural generation: a pattern engine (styles as data), a sample/synthesis layer with free CC0 soundfonts (FluidSynth) or generated drums, chord parsing from charts (ChordPro), and humanization (swing, dynamics, fills). Start with drums + bass + simple keys — that's 90% of practice value. Runs locally in a desktop app or in-browser via Web Audio.</dd>
+      <dt>Why it's €0</dt><dd>The whole thing is code + free samples. No AI cloud music model, no per-track API fees, no licenses — you own everything you generate, so the user can too.</dd>
+      <dt>Money later</dt><dd>One-time unlock or packs (styles, expansions), teacher/school site licenses, and later a licensed-content marketplace only if you ever want that headache (#91 stays parked).</dd>
+      <dt>First step</dt><dd>Ship one style (slow blues or pop ballad) with drums+bass, chord input via text field. Ten loyal users is enough to know.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#194 &middot; PLUGINS — TRANSCRIPTION</span>
+    <h3>Guitar → Tab On Your Own Takes <span class="tag star">★ closes a real loop</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>You play into your PC (or load a recording you made), and it produces a clean, playable tab of <b>what you actually played</b> — with sensible fret positions, string choices and techniques inferred where it can (slides, bends, palm mutes as "probable"), ready to edit and export.</dd>
+      <dt>Why it's deep</dt><dd>All the existing AI transcription tools aim at music from streaming — the copyright minefield — and they output messy, unplayable results. Aiming at the user's own recordings flips both problems: legally clean, and personally useful. Teachers wanting to document a student's progression, composers sketching ideas, players archiving riffs — nobody serves them, because everyone is chasing "transcribe Spotify".</dd>
+      <dt>How it works</dt><dd>Spotify's Basic Pitch (Apache-2.0, free, runs on CPU) for note extraction, then your own layer: guitar-logic inference for position/fingering, notation rendering via alphaTab/VexFlow, MIDI export. Desktop app; processing local.</dd>
+      <dt>Why it's €0</dt><dd>Free open-source model + local processing + the user's own audio. No rights, no servers, no GPU.</dd>
+      <dt>Money later</dt><dd>Pro tier (export formats, batch, precision modes), teacher bundles, an API for practice apps.</dd>
+      <dt>First step</dt><dd>Build the pipeline for a single-note melody line, then chords one string-set at a time. Measure output against your own recordings — you're the ideal test user.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#3 + #4 &middot; PRACTICE</span>
+    <h3>Practice Logger + "Guitar Wrapped" <span class="tag star">★ the habit machine</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>A desktop/web app that <b>passively detects when you're playing</b> (audio activity through your interface/mic), logs sessions automatically, saves your best take of each session, and once a year (or month) shows you a beautiful recap: hours played, streak, most-played keys and tempos, speed progress, before/after clips.</dd>
+      <dt>Why it's deep</dt><dd>Every practice app in existence makes you <em>declare</em> your practice (timers, forms). Nobody just notices. And nothing gives guitarists the one thing that spreads products like fire — a shareable, flattering, personal annual recap. Spotify Wrapped taught the entire internet that people love their own data when it's presented well. Guitarists have never had it.</dd>
+      <dt>How it works</dt><dd>On-device audio activity detection (simple RMS + musical-content heuristics to avoid counting Netflix), IndexedDB/SQLite for logs, Web Audio for saving take snippets. Web app first (installable PWA), desktop app later for always-on monitoring.</dd>
+      <dt>Why it's €0</dt><dd>All processing local. No cloud audio, no storage bill. Static free hosting.</dd>
+      <dt>Money later</dt><dd>Freemium: free logging + recap, Pro for insights ("your tempo ceiling rose 12 BPM this quarter"), coaching marketplace connections, teacher dashboards.</dd>
+      <dt>First step</dt><dd>Ship the detector alone: "we logged 34 minutes today" is the whole MVP. Then wrap the stats.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#220 &middot; PLUGINS — PORTABILITY</span>
+    <h3>Cross-Vendor Preset Portability Hub <span class="tag star">★ community data moat</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>Tone is trapped in ecosystems. You build a sound on a Helix, you want it on Quad Cortex or AmpliTube or your friend's Kemper. This hub is (a) a community-maintained map of how parameters correspond between platforms, and (b) a converter assistant that does a best-effort translation and <b>honestly flags what it can't translate</b>.</dd>
+      <dt>Why it's deep</dt><dd>Vendor librarian software is deliberately one-device-only. The community already does this by hand in forum threads, badly. Five years of crowd edits later, you own the <b>interchange layer</b> — the thing everyone consults and nobody can clone because it's built on thousands of verified mappings, not code.</dd>
+      <dt>How it works</dt><dd>Structured mappings (JSON) per parameter type, community-submitted + moderated; a converter for the easy 80% (gain structure, EQ points, delay/reverb parameters, ordering); export to preset formats where openly documented. Static site + a small local converter app.</dd>
+      <dt>Why it's €0</dt><dd>Community content, static hosting, local conversion. No vendor deals needed (they may later come to <em>you</em>).</dd>
+      <dt>Money later</dt><dd>Pro conversion packs for complex platforms, brand partnerships, and the standard itself (#202/#226) as an asset.</dd>
+      <dt>First step</dt><dd>Publish 20 mappings for the two most popular platforms and let people edit them. The editing UX is the product.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#49 &middot; EAR TRAINING</span>
+    <h3>On-Instrument Ear Trainer <span class="tag star">★ the loop nobody closes</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>Ear training where the answer is <b>played on your guitar</b>, not guessed with buttons. The app plays a note, interval, scale degree or short phrase; you play it back through your mic or interface; it scores pitch accuracy, timing and consistency. The skill you actually need — ear → hand — trained for real.</dd>
+      <dt>Why it's deep</dt><dd>Ear training is a proven paid category (functional ear trainers, interval apps, exam-prep). But virtually all of it is multiple-choice listening on a phone. The gap between "I can recognise a perfect fourth" and "I can play back a melody I hear" is exactly where musicians live, and almost nothing trains it. Training through the instrument also means the app teaches <em>fretboard</em> ear: which position, which string, which octave.</dd>
+      <dt>How it works</dt><dd>Web Audio for playback; pitch detection (YIN/autocorrelation or CREPE) on the mic input; scoring engine for pitch/timing; difficulty ladder from single notes → intervals → scale degrees → 2-bar phrases → call-and-response. Browser first, all local.</dd>
+      <dt>Why it's €0</dt><dd>Pure DSP in the browser. No content licenses (it plays tones it generates), no server, no hardware.</dd>
+      <dt>Money later</dt><dd>Subscription for structured programs and progress stats; teacher licensing (tie to #118/#119); exam-prep packs (tie to #7).</dd>
+      <dt>First step</dt><dd>Ship "play back the note" with clean pitch scoring. Nail the microphone experience — that's the moat.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#118 &middot; TEACHING (B2B)</span>
+    <h3>Self-Grading Homework <span class="tag star">★ cash before cost</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>The teacher assigns a task: "play this chart at 80 BPM, clean chord changes." The student records the attempt in the app. It gets scored automatically — timing vs. the click, chord clarity, missed changes — and the teacher sees a detailed report <b>before the next lesson</b>, including a waveform-level view of the trouble spots.</dd>
+      <dt>Why it's deep</dt><dd>Every guitar teacher wastes the first ten minutes of every lesson re-listening to what the student did at home, badly self-reported. This replaces that with data. It's also the classic B2B shape that fits a €0 builder perfectly: <b>the school pays by invoice</b>, so money arrives before you spend anything on infrastructure.</dd>
+      <dt>How it works</dt><dd>Browser recording (MediaRecorder), on-device scoring against a reference click + expected chord chart, a teacher dashboard (can start as a free-tier web app), simple accounts. The scoring core is shared with #3/#49/#200 — build once.</dd>
+      <dt>Why it's €0</dt><dd>Free-tier hosting + local processing; no licenses (charts are PD or the teacher's own, #125/#130 help there); students never pay, so there's no payment infra to build at the start.</dd>
+      <dt>Money later</dt><dd>Schools and teachers pay a flat monthly per-class or per-teacher fee by invoice; later, a marketplace of self-grading assignment packs (scales, exam pieces, technique drills).</dd>
+      <dt>First step</dt><dd>One teacher (or yourself as a test) + one assignment type (chord-change timing against a click). Prove the report saves lesson time.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#169 &middot; TRUST &amp; STANDARDS</span>
+    <h3>Open Tab Format + Viewer SDK <span class="tag star">★ infrastructure play</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>The missing open layer on top of alphaTab: a modern, community-owned tab data format (with techniques, annotations, difficulty levels, licensing metadata per entry) plus an embeddable viewer that any small site, teacher, or forum can drop in with one line of code — free.</dd>
+      <dt>Why it's deep</dt><dd>Tab distribution today is either giant ad-choked platforms or PDFs. The rendering technology (alphaTab) is already open and excellent — what's missing is <b>format + metadata + ecosystem</b>: an easy way for independent sites to host playable tabs with clear rights, and for creators to publish with attribution. Whoever provides that plumbing becomes the quiet standard everything else is built on.</dd>
+      <dt>How it works</dt><dd>Define the format (JSON-based, versioned), write converters (import from Guitar Pro / MusicXML / text tab, export the same), build the SDK around alphaTab (MPL-2.0 — embedding is fine) with a clean skin, publish everything open source, and run a free CDN-hosted viewer.</dd>
+      <dt>Why it's €0</dt><dd>Open source + static/CDN free tier. The work is design and standards, not infrastructure.</dd>
+      <dt>Money later</dt><dd>Hosting/analytics/takedown-management services for sites that adopt it, paid annotations (professional transcriptions), and consulting/adapters for schools and publishers.</dd>
+      <dt>First step</dt><dd>Ship the viewer + format spec with 20 example public-domain tabs. Get three real sites embedding it — that's adoption, not downloads.</dd>
+    </dl>
+  </div>
+
+  <div class="deep">
+    <span class="id">#147 + #148 &middot; SOCIAL</span>
+    <h3>Riff Battles + Daily Riff Streak <span class="tag star">★ distribution first</span></h3>
+    <dl>
+      <dt>What it is</dt><dd>Two halves of one growth engine. <b>Daily Riff:</b> a new riff lands every day; you record 15 seconds; a streak counter keeps you honest; you can duet anyone else's take. <b>Riff Battles:</b> head-to-head brackets on weekly themes, judged by community votes and an audio score.</dd>
+      <dt>Why it's deep</dt><dd>This is the only category in the bank that is <b>distribution-first</b>: content is user-generated (no rights cost), clips ride short-video behavior people already have, and the streak gives the retention mechanics every lesson app wishes it had. Meanwhile the incumbents are all paywalled classrooms — nobody owns the free, social, daily-habit layer for guitar.</dd>
+      <dt>How it works</dt><dd>Browser recording (MediaRecorder) → optional on-device audio scoring (shared engine with #3/#49) → free-tier storage for small clips (or user-hosted + embed) → ranking/voting logic. PWA first; everything can start on free tiers because clips are short.</dd>
+      <dt>Why it's €0</dt><dd>UGC content + generated riffs (your own, from #89's engine if you like), free static hosting, clips kept tiny. At real scale you'd outgrow free tiers — by then you have users to monetize.</dd>
+      <dt>Money later</dt><dd>Brand sponsorships (gear makers want this audience), cosmetic/vanity features, tournaments, and the challenge packs feeding into the practice apps (#3/#25).</dd>
+      <dt>First step</dt><dd>Run one week of daily riffs manually (a post per day, replies as entries) before writing any code. If the format catches, build it.</dd>
+    </dl>
+  </div>
+</div></section>
+<!-- ================= CATALOG ================= -->
+<section id="catalog-top"><div class="wrap">
+  <h2><span class="hs">Section 03</span>The live catalog — ~210 ideas, all €0-buildable</h2>
+  <p class="lead">Every surviving idea, explained in one or two sentences: what it does and why it holds up. Numbers match the research documents (parts 1–4). Use the search box to filter everything below.</p>
+  <div class="searchbar">
+    <input id="q" type="search" placeholder="Search all ideas… (e.g. microphone, teachers, NAM, backing, repair)" aria-label="Search ideas">
+    <span class="hint" id="count"></span>
+  </div>
+</div></section>
+
+<!-- ---------- PRACTICE ---------- -->
+<section id="practice" class="cat"><div class="wrap">
+  <h2><span class="hs">Group A &middot; 1–26</span>Practice &amp; Learning</h2>
+  <p class="cat-intro"><b>What this group is:</b> tools that make you a better player — feedback, habits, diagnosis, curricula. <b>Why it fits €0:</b> all of it is microphone + math + UI, processed on the user's own machine. <b>Money later:</b> freemium unlocks, teacher/school tiers, exam-prep packs.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#1</span><span class="name">Adaptive practice coach</span></div><p>Listens to you play via mic and rewrites <b>tomorrow's plan</b> based on what was weak. Existing apps give feedback in the moment — none adjust the plan.</p></div>
+    <div class="card"><div class="head"><span class="num">#2</span><span class="name">Spaced repetition for guitar</span></div><p>Anki for repertoire: licks, chord shapes and songs resurface on a schedule based on how well you actually played them (mic-verified).</p></div>
+    <div class="card"><div class="head"><span class="num">#3</span><span class="name">Auto practice-logger</span><span class="tag star">★</span></div><p>Passively detects when you're playing, logs time and tempo, saves your best take of the session. No manual timers, ever. <span class="tag warn">⚠ web/desktop, not iOS</span></p></div>
+    <div class="card"><div class="head"><span class="num">#4</span><span class="name">"Guitar Wrapped"</span><span class="tag star">★</span></div><p>Year-in-review of your playing: hours, streaks, fastest progression, most-played keys, before/after clips. Built to be shared.</p></div>
+    <div class="card"><div class="head"><span class="num">#5</span><span class="name">Weakness radar</span></div><p>A diagnostic battery — chord changes, bends, barre stamina, picking accuracy — plotted on a spider chart with targeted drills for the weak axes.</p></div>
+    <div class="card"><div class="head"><span class="num">#6</span><span class="name">Song-first curriculum</span></div><p>Name the song you want to play; the app reverse-engineers the technique tree you need and builds the path. Your goal, not a generic syllabus.</p></div>
+    <div class="card"><div class="head"><span class="num">#7</span><span class="name">Exam prep companion</span></div><p>Rockschool/ABRSM/Trinity graded-guitar syllabus tracker with sight-reading and aural drills. <span class="tag warn">⚠ track the public syllabus, host nothing licensed</span></p></div>
+    <div class="card"><div class="head"><span class="num">#8</span><span class="name">Jazz comping trainer</span></div><p>Scores your voicings and time, then comps with you (piano/bass) through the changes. Practice partners that react are the missing half.</p></div>
+    <div class="card"><div class="head"><span class="num">#9</span><span class="name">Triad / CAGED trainer</span></div><p>Every triad inversion across string sets, game-ified and quizzed on a fretboard with audio confirmation of your answers.</p></div>
+    <div class="card"><div class="head"><span class="num">#10</span><span class="name">Adaptive speed trainer</span></div><p>Detects your clean max tempo for a lick through the mic, ramps in safe increments, backs off when it hears slop. A closed-loop metronome.</p></div>
+    <div class="card"><div class="head"><span class="num">#11</span><span class="name">Picking-motion coach</span></div><p>Phone camera (free MediaPipe hand tracking) + audio flags inefficient pick motion, tension and anchoring problems.</p></div>
+    <div class="card"><div class="head"><span class="num">#12</span><span class="name">Posture webcam coach</span></div><p>Flags the wrist angles, shoulder hike and neck position that cause tendonitis. Cheap to build now, nobody's done it.</p></div>
+    <div class="card"><div class="head"><span class="num">#13</span><span class="name">Sight-reading trainer</span></div><p>Position-aware: it knows where a note <em>can</em> be played and scores sensible position choices, not just correct pitches.</p></div>
+    <div class="card"><div class="head"><span class="num">#14</span><span class="name">Rhythm-first beginner path</span></div><p>Time before chords: clap/tap/play-along rhythm course scored by mic. Real pedagogy, and the whole niche is unserved.</p></div>
+    <div class="card"><div class="head"><span class="num">#15</span><span class="name">Fingerstyle bootcamp</span></div><p>Thumb independence and Travis picking with tab + animated hand overlays, scored through your mic.</p></div>
+    <div class="card"><div class="head"><span class="num">#16</span><span class="name">Barre chord survival program</span></div><p>Graded 6-week plan for the #1 beginner pain point: strength tracking, arch checks, micro-drills. Physical therapy logic for hands.</p></div>
+    <div class="card"><div class="head"><span class="num">#17</span><span class="name">Slide intonation visualizer</span></div><p>Shows cents deviation live while you glide. Teaches slide by eye and ear at once; tiny market, zero competition.</p></div>
+    <div class="card"><div class="head"><span class="num">#18</span><span class="name">Kids' guitar adventure</span></div><p>Mic-scored quests with a cartoon fretboard, 10 minutes a day, parent progress emails. Nobody owns ages 6–9.</p></div>
+    <div class="card"><div class="head"><span class="num">#19</span><span class="name">Senior-friendly beginner app</span></div><p>Giant type, slow tempos, chair-friendly posture, arthritis-adapted chord choices. Underserved and growing market.</p></div>
+    <div class="card"><div class="head"><span class="num">#20</span><span class="name">Classroom mode (music schools)</span></div><p>Teacher dashboard for 20 students: who practiced, who's stuck, auto-generated homework. Schools pay; students pay nothing.</p></div>
+    <div class="card"><div class="head"><span class="num">#21</span><span class="name">Practice accountability pods</span></div><p>Four-person cohorts with streak targets and a shared feed. Sticky because of the people, not the points.</p></div>
+    <div class="card"><div class="head"><span class="num">#22</span><span class="name">"Play in public in 30 days"</span></div><p>Outcome-driven program: five stage-ready songs plus a performance simulator at the end. People pay for outcomes, not lessons.</p></div>
+    <div class="card"><div class="head"><span class="num">#23</span><span class="name">Performance-pressure simulator</span></div><p>Rehearse with crowd noise, distraction sounds, red-light camera mode and a cold-hands timer. Every gigging amateur needs it.</p></div>
+    <div class="card"><div class="head"><span class="num">#24</span><span class="name">White-label app for teachers</span></div><p>Any YouTube guitar teacher spins up their own branded lesson app — their videos, their students — in an afternoon. You take a cut.</p></div>
+    <div class="card"><div class="head"><span class="num">#25</span><span class="name">Daily riff streak</span></div><p>Three-minute micro-lesson delivered by notification, scored by mic. The Wordle-ification of guitar practice.</p></div>
+    <div class="card"><div class="head"><span class="num">#26</span><span class="name">Personal A&amp;R credential</span></div><p>Pass a real skill battery, earn a shareable "ready to gig / ready for jazz band" badge. Credentials monetize; levels motivate.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- TABS ---------- -->
+<section id="tabs" class="cat"><div class="wrap">
+  <h2><span class="hs">Group B &middot; 27–48</span>Tabs, Notation &amp; Transcription</h2>
+  <p class="cat-intro"><b>What this group is:</b> how music gets written down, shared, converted and practiced. <b>Why it fits €0:</b> Rule 3 — everything processes the user's own files, public-domain music, or open formats. <b>Money later:</b> referrals to legal sheet-music sellers, Pro conversion features, teacher packs.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#27</span><span class="name">Public-domain songbook generator</span><span class="tag star">★</span></div><p>Turns out-of-copyright music into clean, playable guitar arrangements with tab, notation and audio. Legally bulletproof content in a category where everyone else is exposed.</p></div>
+    <div class="card"><div class="head"><span class="num">#28</span><span class="name">CC-licensed tab commons</span></div><p>Wikipedia-for-tabs with licensing baked in from day one: contributors publish under Creative Commons, reputation and proofreading economics included.</p></div>
+    <div class="card"><div class="head"><span class="num">#30</span><span class="name">Audio → tab for your own recordings</span></div><p>Play it or load your file, get a rough tab of what you actually played. Basic Pitch does the note extraction; you add the guitar logic.</p></div>
+    <div class="card"><div class="head"><span class="num">#31</span><span class="name">YouTube practice looper</span><span class="tag warn">⚠ embed, never download</span></div><p>Paste a link, get bar-accurate loops and slowed audio for practice. Rides the embed player so there's no content storage or rights problem.</p></div>
+    <div class="card"><div class="head"><span class="num">#33</span><span class="name">Tab copyright grader for authors</span></div><p>Upload your transcription plus the audio and learn whether you've copied a published arrangement or made an original transcription — plus a licensing checklist.</p></div>
+    <div class="card"><div class="head"><span class="num">#34</span><span class="name">Official-license aggregator</span></div><p>One search shows where to legally buy each song's tab (Musicnotes, Sheet Music Direct, Hal Leonard) with prices compared. Referral revenue, zero rights risk.</p></div>
+    <div class="card"><div class="head"><span class="num">#35</span><span class="name">Chart simplifier</span></div><p>Takes a chord chart (your own copy) and rewrites it into four open chords that keep the melody. The killer adult-beginner feature nobody ships.</p></div>
+    <div class="card"><div class="head"><span class="num">#36</span><span class="name">One-string / accessibility tabs</span></div><p>Simplifies any melody into note-by-note playable lines for kids, beginners and players with limited mobility. Teachers order these in bulk.</p></div>
+    <div class="card"><div class="head"><span class="num">#37</span><span class="name">Nashville Number converter</span></div><p>Instant NNS ↔ chord charts ↔ transposition, plus capo calculator and a "what key will the singer want" slider. Beloved by gigging players and worship teams.</p></div>
+    <div class="card"><div class="head"><span class="num">#39</span><span class="name">Capo intelligence</span></div><p>Explains visually on a fretboard: "capo 3, play G shapes, actual key Bb." The theory beginners never get, packaged as one widget.</p></div>
+    <div class="card"><div class="head"><span class="num">#40</span><span class="name">Alternative-tuning chord library</span></div><p>DADGAD, open G/D, drop C: chord shapes, drone backing per tuning. Slide, folk and Celtic players have almost nothing.</p></div>
+    <div class="card"><div class="head"><span class="num">#41</span><span class="name">Tab + video sync editor</span></div><p>A creator tool: upload performance video and tab, get them scrolling in perfect sync for lessons and social clips.</p></div>
+    <div class="card"><div class="head"><span class="num">#42</span><span class="name">Vertical tab videos</span></div><p>15-second riff format with tab animating over the clip, made for Reels/TikTok. A content format and a distribution channel in one. <span class="tag warn">⚠ creators use their own material</span></p></div>
+    <div class="card"><div class="head"><span class="num">#43</span><span class="name">Handwritten tab digitizer</span></div><p>Photo of your paper tab → clean digital tab. Every old-school player and luthier has boxes of this stuff.</p></div>
+    <div class="card"><div class="head"><span class="num">#44</span><span class="name">Chord chart cleaner</span></div><p>Takes the janky 2007-era chord page you found and reflows it into a proper printable lead sheet. "This, but not ugly."</p></div>
+    <div class="card"><div class="head"><span class="num">#45</span><span class="name">Smart songbook binder</span></div><p>All your charts — PDF, ChordPro, text, screenshots — in one local library with transposition, autoscroll and foot-pedal control. Local-first means no server bills.</p></div>
+    <div class="card"><div class="head"><span class="num">#48</span><span class="name">Fingering advisor</span></div><p>Import MusicXML, get recommended positions and fingerings for your hand size and level. Classical guitarists do this by hand for hours.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- EAR ---------- -->
+<section id="ear" class="cat"><div class="wrap">
+  <h2><span class="hs">Group C &middot; 49–62</span>Ear, Rhythm &amp; Timing</h2>
+  <p class="cat-intro"><b>What this group is:</b> the internal skills — hearing, timing, feel. <b>Why it fits €0:</b> pure DSP against the user's microphone; the app generates every note it plays, so there is no content to license. <b>Money later:</b> structured programs and progress stats justify subscriptions better than almost anything else.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#49</span><span class="name">On-instrument ear trainer</span><span class="tag star">★</span></div><p>Hear it, play it back on your guitar, get scored. The ear→hand loop almost nobody trains because apps use buttons instead of your instrument.</p></div>
+    <div class="card"><div class="head"><span class="num">#50</span><span class="name">Functional ear trainer for guitar</span></div><p>Scale-degree training, but the answer is a fretboard position in your key of the day, with guitar timbre. Functional Ear Trainer is piano-shaped.</p></div>
+    <div class="card"><div class="head"><span class="num">#51</span><span class="name">Call-and-response phrase game</span></div><p>The app plays a two-bar phrase; you echo it. Phrases grow in length and harmonic complexity. Jazzers pay teachers for exactly this.</p></div>
+    <div class="card"><div class="head"><span class="num">#53</span><span class="name">Groove scoring</span></div><p>Play against a drum loop, get a millisecond-level timing report: ahead, behind, uneven, rushing bar four. Quantify your pocket.</p></div>
+    <div class="card"><div class="head"><span class="num">#54</span><span class="name">Listening metronome</span></div><p>Speeds up when you're solid, slows down when you struggle, and sometimes goes silent to test your internal time. The first metronome innovation in 200 years.</p></div>
+    <div class="card"><div class="head"><span class="num">#55</span><span class="name">Polyrhythm playground</span></div><p>3:2, 4:3, clave, son, rumba patterns over generated grooves, scored. Rhythm-section players would pay immediately.</p></div>
+    <div class="card"><div class="head"><span class="num">#56</span><span class="name">Subdivision trainer</span></div><p>8ths → 16ths → triplets → swing with a visual pulse and error highlighting. Answers "why do I rush every solo."</p></div>
+    <div class="card"><div class="head"><span class="num">#57</span><span class="name">Take timing analyzer</span></div><p>Analyze a recording you made: bar-by-bar rush/drag heatmap and the exact bars to loop next session.</p></div>
+    <div class="card"><div class="head"><span class="num">#58</span><span class="name">Volume / hearing meter</span></div><p>A dB meter for band practice with a "you're at 98 dB, that's a 90-minute budget" warning. Public-health angle, free to build with a mic.</p></div>
+    <div class="card"><div class="head"><span class="num">#59</span><span class="name">Closed-loop intonation tester</span></div><p>Pitch at open, 12th and other frets → diagnoses nut, saddle and neck issues, then gives the adjustment recipe. Ties into #79.</p></div>
+    <div class="card"><div class="head"><span class="num">#60</span><span class="name">Bend trainer</span></div><p>Target note shown, your bend measured in cents in real time, hold it for two seconds to pass. The best lead-guitar drill that didn't exist.</p></div>
+    <div class="card"><div class="head"><span class="num">#61</span><span class="name">Vibrato coach</span></div><p>Measures rate, width and consistency of your vibrato against reference profiles. Unbelievably niche, unbelievably loved by blues players.</p></div>
+    <div class="card"><div class="head"><span class="num">#62</span><span class="name">Transcription bootcamp</span></div><p>Stems unmute progressively as you correctly identify chord changes by playing them. Learn songs by ear as an actual workout.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- TONE & GEAR ---------- -->
+<section id="tone" class="cat"><div class="wrap">
+  <h2><span class="hs">Group D &middot; 63–84</span>Tone &amp; Gear Tools</h2>
+  <p class="cat-intro"><b>What this group is:</b> everything around the gear — choosing it, setting it up, keeping it alive, knowing what it's worth. <b>Why it fits €0:</b> these are databases, calculators, diagrams and reference tools; the content comes from public sources and the crowd. <b>Money later:</b> affiliate links, shop referrals, Pro features for collectors and techs.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#63</span><span class="name">"How do I get this tone"</span></div><p>Describe a recording (or play it) and get pedal order, amp settings, pickup position, EQ curve and a shopping list at three budgets. SEO-friendly, affiliate-funded.</p></div>
+    <div class="card"><div class="head"><span class="num">#65</span><span class="name">Pedalboard planner that listens</span></div><p>Plan the board, then A/B your rig before and after a proposed change via EQ-matched simulation of your own recording.</p></div>
+    <div class="card"><div class="head"><span class="num">#66</span><span class="name">Tone-capture compare</span></div><p>Record a dry DI, run it through your profiler/plugin, and A/B against the original with a residual-error readout. Pro-grade nerd tool.</p></div>
+    <div class="card"><div class="head"><span class="num">#68</span><span class="name">Preset exchange + converter</span></div><p>Share presets across modelers and plugins with community mappings. Ties directly into #220's portability hub.</p></div>
+    <div class="card"><div class="head"><span class="num">#69</span><span class="name">Settings database by song</span></div><p>Community-verified amp and pedal settings for famous songs, with audio proof and version votes. "Sultans of Swing = 420 ms, 30% mix."</p></div>
+    <div class="card"><div class="head"><span class="num">#70</span><span class="name">Gear A/B blind test site</span></div><p>Two clips, everyone guesses which is the $3,000 rig. Results feed a public database of whether gear actually sounds different.</p></div>
+    <div class="card"><div class="head"><span class="num">#71</span><span class="name">Crowdsourced pickup &amp; rig library</span><span class="tag warn">⚠ reshaped: users record their own gear</span></div><p>Standardized DI samples of pickups and rigs, contributed by owners instead of bought by you. Blind-test player included. (The "buy 500 pickups" version stays parked.)</p></div>
+    <div class="card"><div class="head"><span class="num">#72</span><span class="name">"Is this gear worth it for me" advisor</span></div><p>Your genre, room, volume limits, budget and current rig in — scored recommendations with reasons and used prices out. Decision support, not listings.</p></div>
+    <div class="card"><div class="head"><span class="num">#73</span><span class="name">Apartment-volume tone solutions</span></div><p>What your tone sounds like at 65 dB, with attenuation, load-box and headphone options ranked. The urban player's #1 constraint.</p></div>
+    <div class="card"><div class="head"><span class="num">#75</span><span class="name">Gear flips tracker</span></div><p>Bought/sold log with fees, shipping, taxes and an hourly-rate sanity check. Gear acquisition syndrome meets accounting.</p></div>
+    <div class="card"><div class="head"><span class="num">#76</span><span class="name">Wiring diagram generator</span></div><p>Pick pickups, switches and mods (coil split, out-of-phase, blower, treble bleed) → clean diagram, parts list, switch truth table. Every mod-forum question ever asked, productized.</p></div>
+    <div class="card"><div class="head"><span class="num">#77</span><span class="name">Guitar mod visualizer</span></div><p>Preview hardware, pickup and finish swaps on your guitar, with a note on resale impact. A Kisekae-style builder that's modern and shareable.</p></div>
+    <div class="card"><div class="head"><span class="num">#78</span><span class="name">Parts compatibility checker</span></div><p>"Will this neck fit this body?" — structured fit rules for partscaster builders. Unglamorous, huge search demand, affiliate revenue.</p></div>
+    <div class="card"><div class="head"><span class="num">#79</span><span class="name">Setup wizard</span><span class="tag star">★</span></div><p>Guided truss rod / action / intonation workflow with phone-camera measurements, humidity logging and a printable setup sheet. Millions of searches, no good tool.</p></div>
+    <div class="card"><div class="head"><span class="num">#80</span><span class="name">String-life tracker</span></div><p>Log string changes with brand, gauge, coating and hours played (from #3); get change reminders based on your own data. Feels like magic for pennies of work.</p></div>
+    <div class="card"><div class="head"><span class="num">#81</span><span class="name">Humidity &amp; climate log</span></div><p>Free weather API + manual readings track the climate your guitars live in and warn before cracking season. <span class="tag warn">⚠ no hardware required</span></p></div>
+    <div class="card"><div class="head"><span class="num">#82</span><span class="name">Tone diary</span></div><p>Sixty seconds recorded per session, tagged with rig, room and settings, later searchable as "that clean sound from March."</p></div>
+    <div class="card"><div class="head"><span class="num">#83</span><span class="name">Pedalboard cost planner</span></div><p>Total cost of the board you're building, including the €90 for isolated power everyone forgets. Playful GAS management.</p></div>
+    <div class="card"><div class="head"><span class="num">#84</span><span class="name">Modeler translation explainer</span></div><p>Shows how a real amp's signal chain maps to your modeler's blocks, so you recreate tones by understanding instead of copying numbers.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- SONGWRITING ---------- -->
+<section id="writing" class="cat"><div class="wrap">
+  <h2><span class="hs">Group E &middot; 85–100</span>Songwriting &amp; Creativity</h2>
+  <p class="cat-intro"><b>What this group is:</b> tools for getting ideas out of your head and into a shape. <b>Why it fits €0:</b> every tool generates its own audio from your input — nothing references a copyrighted recording. <b>Money later:</b> one-time Pro unlocks; writers hate subscriptions but buy tools.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#85</span><span class="name">Hum-to-chords idea vault</span><span class="tag star">★</span></div><p>Hum a melody into your phone; it detects key and tempo, suggests progressions, and files it in a searchable vault. Every songwriter has 400 unlabeled voice memos.</p></div>
+    <div class="card"><div class="head"><span class="num">#86</span><span class="name">Voice memo → lead sheet</span></div><p>Hum it, get a lead sheet with chords and a simple arrangement. Transcription + chord detection + notation in one flow.</p></div>
+    <div class="card"><div class="head"><span class="num">#87</span><span class="name">Progression generator by feeling</span></div><p>"Melancholic but hopeful, DADGAD, for a wedding" → five progressions with fingerings, audio, and why they work. Emotionally searchable theory.</p></div>
+    <div class="card"><div class="head"><span class="num">#88</span><span class="name">Song structure sandbox</span></div><p>Drag intro/verse/chorus/bridge blocks and hear generated backing in your key. Write by arrangement first, chords second.</p></div>
+    <div class="card"><div class="head"><span class="num">#92</span><span class="name">Playlist key &amp; tempo scanner</span></div><p>Scan a list of songs for keys, tempos and capo suggestions, then plan a set order that flows. Brides and bandleaders both want this.</p></div>
+    <div class="card"><div class="head"><span class="num">#93</span><span class="name">Set-energy planner</span></div><p>Models the emotional arc of a live set: warns about three slow songs in a row, suggests key transitions that won't wreck your singer.</p></div>
+    <div class="card"><div class="head"><span class="num">#94</span><span class="name">Arrangement adapter</span></div><p>"I'm a solo acoustic act — adapt this six-piece song" → an arrangement for voice and guitar with part reduction suggestions.</p></div>
+    <div class="card"><div class="head"><span class="num">#95</span><span class="name">Lyric + chord sheet designer</span></div><p>Beautiful, printable, stage-glanceable charts: big chord fonts, section colours, no page turns. Musicians still print ugly Word docs.</p></div>
+    <div class="card"><div class="head"><span class="num">#96</span><span class="name">Covers-licensing planner</span></div><p>Helps you license covers correctly per venue and streaming platform, tracked per song. Boring but real — and nobody wants to build it.</p></div>
+    <div class="card"><div class="head"><span class="num">#97</span><span class="name">Moodboard → tone brief</span></div><p>Three reference tracks in, a shooting brief out: tempo range, tone targets, arrangement references your bandmates will actually understand.</p></div>
+    <div class="card"><div class="head"><span class="num">#98</span><span class="name">Collaboration whiteboard</span></div><p>A shared song workspace — charts, lyric edits, phone recordings, version history. Google Docs for songs, built properly.</p></div>
+    <div class="card"><div class="head"><span class="num">#99</span><span class="name">Riff variation engine</span></div><p>Record four bars; get ten variations (rhythmic displacement, octave, inversion, modal shift) as tab and audio. A writing partner that never judges.</p></div>
+    <div class="card"><div class="head"><span class="num">#100</span><span class="name">Lyric stress checker</span></div><p>Paste lyrics and melody; see where syllable stresses fight the rhythm. Songwriting's most-audible, least-taught mistake.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- BACKING ---------- -->
+<section id="backing" class="cat"><div class="wrap">
+  <h2><span class="hs">Group F &middot; 89–90</span>Backing Tracks — the flagship pair</h2>
+  <p class="cat-intro"><b>What this group is:</b> the practice band that plays exactly your song, in your key, at your tempo, forever. <b>Why it fits €0:</b> you generate the audio from code and free soundfonts — the user owns the output, so there are no licenses anywhere in the chain. <b>Money later:</b> unlocks, style packs, school licenses. <span class="tag warn">⚠ the "marketplace of licensed tracks" (#91) is parked — content is the expensive part.</span></p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#89</span><span class="name">Generated backing tracks</span><span class="tag star">★ flagship</span></div><p>Chord chart in → drums, bass, keys and optional rhythm guitar out, in any style, tempo and feel, with count-ins, fills and sections. Procedural generation plus free CC0 soundfonts; the whole thing runs on the user's machine and the output belongs to them.</p></div>
+    <div class="card"><div class="head"><span class="num">#90</span><span class="name">Adaptive backing band</span></div><p>A virtual band that follows <b>your</b> tempo and dynamics instead of forcing a grid. Start with chord-following; the full adaptive version is the hard, valuable version.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- JAMMING ---------- -->
+<section id="jamming" class="cat"><div class="wrap">
+  <h2><span class="hs">Group G &middot; 101–116</span>Jamming, Bands &amp; Gigs</h2>
+  <p class="cat-intro"><b>What this group is:</b> the social infrastructure of playing — finding people, playing with them, managing the band. <b>Why it fits €0:</b> directories, scheduling and coordination are free to build; audio you can route peer-to-peer or over free platforms. <b>Money later:</b> listing boosts, success fees — but free to start.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#101</span><span class="name">Jamulus front-end</span></div><p>A polished social layer over the free open-source low-latency jam engine: rooms, genres, skill tags, scheduled jams. <span class="tag warn">⚠ rooms host peer-to-peer; wired connections only</span></p></div>
+    <div class="card"><div class="head"><span class="num">#102</span><span class="name">Jam-session map</span></div><p>Open mics, blues jams and porch pickers near you with level labels ("beginner-safe") and check-ins so you don't walk into an empty bar.</p></div>
+    <div class="card"><div class="head"><span class="num">#103</span><span class="name">Bandmate finder with a trust layer</span></div><p>Filter by influences, gear, availability, ambition — and reliability history from past bands. Fixes the actual failure mode of every band.</p></div>
+    <div class="card"><div class="head"><span class="num">#105</span><span class="name">Rehearsal room finder</span></div><p>Local studio inventory with hourly booking requests and gear lists. Still done by phone calls in 2026.</p></div>
+    <div class="card"><div class="head"><span class="num">#107</span><span class="name">Dep musician network</span></div><p>"Our guitarist is sick tonight" → verified local deps who know the 40-song covers set, ranked by how fast they learn.</p></div>
+    <div class="card"><div class="head"><span class="num">#108</span><span class="name">Setlist co-editor for the band</span></div><p>Everyone edits in real time, votes on songs, and the drummer always has the final version. Small, sharp, underserved.</p></div>
+    <div class="card"><div class="head"><span class="num">#109</span><span class="name">Rehearsal recorder + auto-split</span></div><p>Records a three-hour practice, auto-splits it by song, tags each take, exports per-song notes. Bands leave rehearsal with recordings instead of vague memories.</p></div>
+    <div class="card"><div class="head"><span class="num">#110</span><span class="name">Band admin bot</span></div><p>Gigs, payouts, mileage, gear checklists and availability as a bot inside Telegram or Discord. <span class="tag warn">⚠ free platforms only — not WhatsApp</span></p></div>
+    <div class="card"><div class="head"><span class="num">#111</span><span class="name">Multi-track rehearsal recorder</span></div><p>Record rehearsal through an interface with per-member stems, auto-mixed, private share links ("here's your bass line, flat in the chorus").</p></div>
+    <div class="card"><div class="head"><span class="num">#112</span><span class="name">Live stream kit for local gigs</span></div><p>Phone + interface + this app → multi-cam stream with a proper audio mix, a tip link and a venue page. Bars want streams; nobody sells them a package.</p></div>
+    <div class="card"><div class="head"><span class="num">#113</span><span class="name">Busker toolkit</span></div><p>Repertoire manager, tip QR, set timer, spot rotation map, weather and foot-traffic forecasts. A real community with zero purpose-built software.</p></div>
+    <div class="card"><div class="head"><span class="num">#114</span><span class="name">Tribute-band toolkit</span></div><p>Reference recordings, note-perfect tab, tone notes, costume checklists and stage plots. Tiny niche, very high willingness to pay.</p></div>
+    <div class="card"><div class="head"><span class="num">#115</span><span class="name">Find-a-teacher with trial automation</span></div><p>Search by genre, area, online/in-person and price; first lesson, booking, payment and reminders automated.</p></div>
+    <div class="card"><div class="head"><span class="num">#116</span><span class="name">Music school open-house tool</span></div><p>Trial-class registration, instrument matching quiz for parents, follow-up sequences. B2B, boring, profitable.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- TEACHING ---------- -->
+<section id="teaching" class="cat"><div class="wrap">
+  <h2><span class="hs">Group H &middot; 117–130</span>Teaching &amp; Schools <span class="tag free">B2B — pays by invoice</span></h2>
+  <p class="cat-intro"><b>What this group is:</b> tools for the people who teach. <b>Why it fits €0 (and beats everything):</b> schools and teachers pay by invoice — cash arrives before you spend anything on infrastructure. No payment systems, no user acquisition costs, no ads. <b>Money later:</b> actually now — this is the fastest-revenue group in the bank.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#117</span><span class="name">Studio OS for independent teachers</span></div><p>Students, scheduling, invoicing, lesson notes, recordings, repertoire tracking and auto-generated weekly practice lists per student. The incumbents are Excel and email.</p></div>
+    <div class="card"><div class="head"><span class="num">#118</span><span class="name">Self-grading homework</span><span class="tag star">★ deep dive above</span></div><p>Teacher assigns "play this at 80 BPM"; the app scores the student's attempt and shows the teacher the detail before the lesson. Cuts the boring half out of teaching.</p></div>
+    <div class="card"><div class="head"><span class="num">#119</span><span class="name">Student progress timeline</span></div><p>A 30-second clip every lesson, building the student's own before/after video. The retention mechanism no course platform has.</p></div>
+    <div class="card"><div class="head"><span class="num">#120</span><span class="name">Parent dashboard for kids' practice</span></div><p>Honest practice time (detected, not self-reported) plus printable star charts. Parents pay more than students do.</p></div>
+    <div class="card"><div class="head"><span class="num">#122</span><span class="name">Classroom quiz show</span></div><p>Teacher projects a chord or rhythm question; students answer on phones and on their instruments. Kahoot, but for guitar class.</p></div>
+    <div class="card"><div class="head"><span class="num">#123</span><span class="name">Recital &amp; ensemble manager</span></div><p>Programs, group rehearsal schedules, sheet distribution and audience ticketing links for music schools.</p></div>
+    <div class="card"><div class="head"><span class="num">#124</span><span class="name">Sub-cover marketplace</span></div><p>Teachers trade substitute coverage when sick; schools find emergency instructors. Small product, obvious pain.</p></div>
+    <div class="card"><div class="head"><span class="num">#125</span><span class="name">Teacher's tab tool</span></div><p>Type in a piece; print four differentiated versions — tab, notation, simplified, one-string — for the students in the room.</p></div>
+    <div class="card"><div class="head"><span class="num">#126</span><span class="name">Skill assessment service</span></div><p>A human pro reviews a 20-minute video and writes a three-month plan. Sells at $39–79 and scales with a bench of assessors.</p></div>
+    <div class="card"><div class="head"><span class="num">#127</span><span class="name">White-label course platform</span></div><p>YouTube guitar teachers get their own membership site with lesson embedding, progress tracking, tab viewers and drip schedules.</p></div>
+    <div class="card"><div class="head"><span class="num">#128</span><span class="name">Exam / audition mock service</span></div><p>A human examiner over video scores your mock graded exam like the real thing. High margin, zero inventory.</p></div>
+    <div class="card"><div class="head"><span class="num">#129</span><span class="name">Music school lead-gen engine</span></div><p>SEO-optimized local pages ("guitar lessons in [city]") built for schools. Agency-style recurring revenue.</p></div>
+    <div class="card"><div class="head"><span class="num">#130</span><span class="name">Arrangement service</span></div><p>Teachers commission school-appropriate arrangements of PD or licensed songs from a bench of arrangers. Fixes a weekly headache.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- LUTHIERS ---------- -->
+<section id="luthiers" class="cat"><div class="wrap">
+  <h2><span class="hs">Group I &middot; 131–146</span>Luthiers, Collectors &amp; Gear Commerce</h2>
+  <p class="cat-intro"><b>What this group is:</b> the economy around instruments — repair, valuation, provenance, buying and selling. <b>Why it fits €0:</b> knowledge, community data and public listings; no inventory, no data licenses. <b>Money later:</b> lead-gen to pros, B2B tools for shops, affiliate links.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#131</span><span class="name">Repair diagnostic wizard</span><span class="tag star">★ deep dive above</span></div><p>Symptoms → likely causes → fix order, with measurement guides. The cheapest idea in the bank to build and one of the easiest to earn from.</p></div>
+    <div class="card"><div class="head"><span class="num">#132</span><span class="name">Serial number decoder</span></div><p>Fender, Gibson, Ibanez, Gretsch → year, factory and model line, with "this doesn't match what it claims to be" flags. Earns links forever.</p></div>
+    <div class="card"><div class="head"><span class="num">#133</span><span class="name">Fake-detection assistant</span></div><p>Photo-guided checklist comparing your candidate against known authentics. Buyers pay per check; sellers use it as a badge.</p></div>
+    <div class="card"><div class="head"><span class="num">#134</span><span class="name">Collection manager</span></div><p>Photos, serials, receipts, valuation history and a printable insurance schedule. Neutral — not tied to any shop.</p></div>
+    <div class="card"><div class="head"><span class="num">#135</span><span class="name">Valuation cross-check</span></div><p>Median of public sold prices and listings, condition-adjusted, with a trend line and an honest confidence range.</p></div>
+    <div class="card"><div class="head"><span class="num">#136</span><span class="name">Estate liquidation helper</span></div><p>"Dad left 14 guitars and a workshop" → identify, value, photograph and list step by step, plus buyers who'll take the lot. Grief-adjacent, entirely unserved.</p></div>
+    <div class="card"><div class="head"><span class="num">#137</span><span class="name">Luthier business toolkit</span></div><p>Job intake, quotes, work orders, a photo timeline of every repair, customer approvals, pickup scheduling. Repair shops still run on paper tickets.</p></div>
+    <div class="card"><div class="head"><span class="num">#138</span><span class="name">Repair lead matcher</span></div><p>"Needs a refret" → matched luthiers with wait times and price ranges. Reverb owns selling; nobody owns fixing.</p></div>
+    <div class="card"><div class="head"><span class="num">#139</span><span class="name">Parts scavenger</span></div><p>Saved searches across public listings for the one 1963 tremolo arm you need, with alerts. Hobbyist-with-a-project has no good tool.</p></div>
+    <div class="card"><div class="head"><span class="num">#140</span><span class="name">Vintage provenance tracker</span></div><p>Attach photos, receipts, service history and prior owners to a serial number. The Carfax for old guitars — ownership history raises resale value.</p></div>
+    <div class="card"><div class="head"><span class="num">#143</span><span class="name">Insurance comparison (reduced)</span></div><p>Quote routing and collection-value inputs for instrument-specific policies. Standard home insurance excludes gigging gear; affiliate revenue.</p></div>
+    <div class="card"><div class="head"><span class="num">#144</span><span class="name">Shop inventory syndication</span></div><p>Small shops get their inventory onto marketplaces and a Google-indexed storefront, auto-synced. Shops pay monthly; you fix a dying channel for them.</p></div>
+    <div class="card"><div class="head"><span class="num">#145</span><span class="name">Shop events engine</span></div><p>Clinics, jam nights and repair days promoted to the local guitar population. Shops pay to fill rooms.</p></div>
+    <div class="card"><div class="head"><span class="num">#146</span><span class="name">Guitar show calendar</span></div><p>The guitar-show circuit and local swap meets with a "worth the drive" filter. Community glue, sponsorship revenue.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- SOCIAL ---------- -->
+<section id="social" class="cat"><div class="wrap">
+  <h2><span class="hs">Group J &middot; 147–158 &amp; 163</span>Social, Gamified &amp; Accessibility</h2>
+  <p class="cat-intro"><b>What this group is:</b> the fun layer — competition, streaks, community — plus the software side of adaptive playing. <b>Why it fits €0:</b> content is user-generated or generated by you; the platforms are free until they're big. <b>Money later:</b> sponsors and cosmetics — never charging the players.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#147</span><span class="name">Riff battles</span><span class="tag star">★ deep dive above</span></div><p>Fifteen-second video riffs, head-to-head brackets, weekly themes. TikTok mechanics in a guitar container.</p></div>
+    <div class="card"><div class="head"><span class="num">#148</span><span class="name">Daily riff streak + duet</span></div><p>A riff drops every day; you post your take and duet anyone else's. Streaks plus duets is the retention engine lesson apps wish they had.</p></div>
+    <div class="card"><div class="head"><span class="num">#150</span><span class="name">Multiplayer fretboard quiz</span></div><p>Real-time "name this note / find this interval" battles with a global ladder. The fretboard game, but as a live sport.</p></div>
+    <div class="card"><div class="head"><span class="num">#151</span><span class="name">Feedback game</span></div><p>Record a 60-second performance; scored by an audio model plus community votes, with sponsored weekly winners. <span class="tag warn">⚠ your own recordings, no licensed audio</span></p></div>
+    <div class="card"><div class="head"><span class="num">#152</span><span class="name">Trophy room</span></div><p>Badges for verifiable achievements ("barre chords in every key", "five songs stage-ready") as shareable SVG trophies. Cheap to build, addictive to 12–24s.</p></div>
+    <div class="card"><div class="head"><span class="num">#153</span><span class="name">Practice-with-me livestreams</span></div><p>Scheduled synchronized practice: everyone muted, playing together on a shared timer with a host. Body-doubling for guitarists. <span class="tag warn">⚠ free video platforms</span></p></div>
+    <div class="card"><div class="head"><span class="num">#154</span><span class="name">Guess the guitarist</span></div><p>An audio quiz built from submitted recordings — "name the player from their vibrato." Community-fed, costs nothing to run.</p></div>
+    <div class="card"><div class="head"><span class="num">#155</span><span class="name">Local guitar club OS</span></div><p>Run a meetup: RSVPs, theme nights, chord charts, member levels, photo feed. Meetup.com is generic; clubs are the real unit of community.</p></div>
+    <div class="card"><div class="head"><span class="num">#156</span><span class="name">Riff swap</span></div><p>Send a four-bar riff to a stranger; they send back a layer — bass, harmony, drums. Collaborative music without needing a band.</p></div>
+    <div class="card"><div class="head"><span class="num">#158</span><span class="name">Kids' band league</span></div><p>Teams of four (guitar/bass/drums/keys), weekly missions, inter-school competitions. Turns the app into a social program parents organize around.</p></div>
+    <div class="card"><div class="head"><span class="num">#163</span><span class="name">Adaptive instrument software</span></div><p>Alternate tunings, tapping layouts and chord simplification for players with hand differences or one-handed players. Small market, real funding, real press. <span class="tag warn">⚠ software side only</span></p></div>
+  </div>
+</div></section>
+<!-- ---------- PLUGINS A ---------- -->
+<section id="plugins" class="cat"><div class="wrap">
+  <h2><span class="hs">Group K &middot; 64, 171–180, 209–218, 226</span>Plugins — Amps, Captures &amp; Tone</h2>
+  <p class="cat-intro"><b>What this group is:</b> the tone half of the plugin world — amp sims, capture ("profile") tooling, calibration, and the headphone/room experience. <b>Why it fits €0:</b> the free-rules above — iPlug2/DPF frameworks, VST3+CLAP+LV2, CPU-only inference, TONE3000's free trainer, no iLok. <b>Money later:</b> Pro tiers, creator tools, device partnerships. <b>Reality check:</b> plain amp sims are a solved, saturated market — do not build "another amp sim"; build the tooling around the ecosystem.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#64</span><span class="name">Browser amp sim + FX chain</span></div><p>Full rig in the browser via WebAssembly NAM models, with drag-and-drop pedals and <b>shareable preset links</b>. The sharing layer is the product, not the tone.</p></div>
+    <div class="card"><div class="head"><span class="num">#171</span><span class="name">Capture trainer for humans</span></div><p>Turns "record a sweep and upload it" into a guided 10-minute flow: mic placement coaching, level and clipping checks, accuracy scoring. <span class="tag warn">⚠ basics now covered by free tools; the guidance layer is the gap</span></p></div>
+    <div class="card"><div class="head"><span class="num">#172</span><span class="name">Capture quality score &amp; vetting</span></div><p>Measurement-based ratings for captures — accuracy vs. source, noise floor, aliasing, dynamic-range drift — with a "proven" badge tier. The ecosystem's #1 complaint is digging through bad profiles.</p></div>
+    <div class="card"><div class="head"><span class="num">#173</span><span class="name">Embeddable NAM player</span></div><p>Tone embeds for forum posts, articles and preset pages — hear a capture without installing anything. <span class="tag warn">⚠ partly eaten by TONE3000's in-app audition; the third-party web embed is what's left</span></p></div>
+    <div class="card"><div class="head"><span class="num">#174</span><span class="name">Capture-format bridge</span></div><p>Best-effort cross-ecosystem porting by <b>capture-by-listening</b>: train a NAM model on another format's output. Not file conversion — measured matching.</p></div>
+    <div class="card"><div class="head"><span class="num">#175</span><span class="name">Input-gain &amp; impedance calibrator</span></div><p>The real reason "captures sound wrong": your interface's level and impedance don't match the capturer's. A calibration routine plus per-pack correction notes.</p></div>
+    <div class="card"><div class="head"><span class="num">#176</span><span class="name">Tone-lock matcher</span></div><p>Continuously matches your DI's tonal curve to a reference recording in real time. For cover bands and "sound like the record" practice sessions.</p></div>
+    <div class="card"><div class="head"><span class="num">#177</span><span class="name">Bedroom-volume re-profiler</span></div><p>Capture your amp at 100 dB, then get a version corrected for how hearing changes at low volume — so headphones keep the perceived attack. Every apartment player's white whale.</p></div>
+    <div class="card"><div class="head"><span class="num">#178</span><span class="name">Amp-in-the-room headphone sim</span></div><p>Modeled early reflections and room coupling to kill the "dry, in-my-head" feeling of headphone practice. Pairs with #177 and #211.</p></div>
+    <div class="card"><div class="head"><span class="num">#179</span><span class="name">Live-failover rig host</span></div><p>Hot standby, crash auto-restart with crossfade, click-free patch switching, panic bypass. Fear of the laptop dying is why pros still tour with pedals. <span class="tag warn">⚠ ambitious build</span></p></div>
+    <div class="card"><div class="head"><span class="num">#180</span><span class="name">Interactive signal-path explainer</span></div><p>Drag the delay before or after the distortion, move the reverb to the FX loop, and <b>hear and see</b> why the tone changes. Teaches the thing every self-taught player missed.</p></div>
+    <div class="card"><div class="head"><span class="num">#209</span><span class="name">Device-targeted capture optimizer</span><span class="tag star">★ deep dive above</span></div><p>NAM captures reshaped for specific hardware with a fidelity report. The missing middleware of the 2026 NAM-on-everything wave.</p></div>
+    <div class="card"><div class="head"><span class="num">#210</span><span class="name">Capture parameter extraction</span></div><p>Estimates "knobs" for a frozen capture — gain, tone stack mapping — so profiles become adjustable. Research-grade moonshot; whoever cracks it changes the category.</p></div>
+    <div class="card"><div class="head"><span class="num">#211</span><span class="name">Binaural amp-in-room</span></div><p>HRTF-based rendering of a cab in a real room with head-turn compensation. Headphones stop sounding like skulls.</p></div>
+    <div class="card"><div class="head"><span class="num">#212</span><span class="name">Round-trip latency coach</span></div><p>Measures your true round-trip latency, auto-aligns recorded vs. monitored signal, warns when a chain crosses the playability threshold. The community's most repeated frustration, solved with a utility.</p></div>
+    <div class="card"><div class="head"><span class="num">#213</span><span class="name">Virtual pickup load &amp; cable capacitance</span></div><p>Models input impedance, cable capacitance and pot loading so captures respond like they're plugged into a real guitar. The "why doesn't mine sound like the demo" fix.</p></div>
+    <div class="card"><div class="head"><span class="num">#214</span><span class="name">Pickup-swap emulation</span></div><p>Re-voices a humbucker DI toward single-coil, P90 or filtertron response. <span class="tag warn">⚠ build from free IRs and published measurements — no buying pickups</span></p></div>
+    <div class="card"><div class="head"><span class="num">#215</span><span class="name">String-aware noise gate</span></div><p>Gates only the hum and buzz bands using a learned fingerprint, leaving pick attack and the low E untouched. Generic gates can't do this.</p></div>
+    <div class="card"><div class="head"><span class="num">#216</span><span class="name">Guitar-first ambient/freeze suite</span></div><p>Granular, shimmer, swell, freeze and glitch designed around an expression pedal and a footswitch instead of a mouse. Ambient and post-rock players have no home.</p></div>
+    <div class="card"><div class="head"><span class="num">#218</span><span class="name">Acoustic WaveMap studio</span></div><p>The ToneDexter/VoicePrint trick as software: play pickup + mic, get a matched body-tone IR in the DAW, with blend and anti-feedback. <span class="tag warn">⚠ develop on user-submitted pickup+mic pairs</span></p></div>
+    <div class="card"><div class="head"><span class="num">#226</span><span class="name">Capture spec-sheet standard</span></div><p>Open metadata (gain staging, impedance, mic, cab, room, level reference) written into capture files and read by any player, so profiles sound right by default. An ecosystem young enough that a spec can still land.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- PLUGINS B ---------- -->
+<section id="plugins-b" class="cat"><div class="wrap">
+  <h2><span class="hs">Group L &middot; 181–190</span>Plugins — FX &amp; Mixing</h2>
+  <p class="cat-intro"><b>What this group is:</b> processing that makes recorded guitar better — repair, noise, mixing, doubling. <b>Why it fits €0:</b> standard DSP, CPU-only, user-side audio. <b>Money later:</b> one-time purchase or cheap subscription; audio engineers and producers pay reliably.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#181</span><span class="name">Guitar repair plugin</span></div><p>De-noises guitar specifically: finger squeaks, pick noise, fret-buzz clicks, chair creaks, string rattle. The expensive general tools damage tone trying; nobody made the $49 guitar-specific strip.</p></div>
+    <div class="card"><div class="head"><span class="num">#182</span><span class="name">Hum &amp; ground-loop killer</span></div><p>Adaptive 50/60 Hz fundamental-plus-harmonics suppression that learns the hum's fingerprint from the silent gaps and doesn't gut your highs. P90 and Strat players have waited decades.</p></div>
+    <div class="card"><div class="head"><span class="num">#183</span><span class="name">Mix-ready DI channel strip</span></div><p>Gate → EQ → compressor → saturation → space, voiced for guitar and driven by a reference track. "Match the guitar balance of this mix" as one affordable plugin.</p></div>
+    <div class="card"><div class="head"><span class="num">#184</span><span class="name">Humanized double / quad tracker</span><span class="tag star">★</span></div><p>Turns one DI take into believable doubles with timing jitter, micro pitch/tone drift and pick-attack variance. Producers do this by hand; no first-class tool exists.</p></div>
+    <div class="card"><div class="head"><span class="num">#185</span><span class="name">Preset loudness normalizer</span></div><p>Equalizes perceived loudness across every patch in your setlist. The live-set killer — switching from a clean Fender to a Recto shouldn't blow the room's head off.</p></div>
+    <div class="card"><div class="head"><span class="num">#186</span><span class="name">Parallel-chain phase/latency aligner</span></div><p>Auto-aligns dry, re-amped, pedal-sim and reverb paths so parallel rigs stop comb-filtering. Still a manual stem-measuring chore today.</p></div>
+    <div class="card"><div class="head"><span class="num">#187</span><span class="name">Feedback sim</span></div><p>Controlled musical feedback and sustain for headphones and DAW recording. <span class="tag warn">⚠ mono version exists (Blue Cat AcouFiend) — build the per-string/polyphonic version</span></p></div>
+    <div class="card"><div class="head"><span class="num">#189</span><span class="name">Re-amp session recall</span></div><p>Store DI + full chain + gain staging as a recallable package, byte-perfect years later, with batch re-amping and per-song notes.</p></div>
+    <div class="card"><div class="head"><span class="num">#190</span><span class="name">"Sit in the mix" assistant</span></div><p>Analyzes the whole mix and adjusts the guitar bus to fit, explaining what it did and why. The explainability is the product — silent AI magic is already distrusted.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- PLUGINS C ---------- -->
+<section id="plugins-c" class="cat"><div class="wrap">
+  <h2><span class="hs">Group M &middot; 191–197</span>Plugins — Virtual Guitars &amp; Songwriting Instruments</h2>
+  <p class="cat-intro"><b>What this group is:</b> software that <em>plays guitar</em> for composers — turning charts, notation and ideas into believable parts. <b>Why it fits €0:</b> only with free sample libraries (SFZ/CC0) or synthesis. <b>Money later:</b> producers and composers buy instruments; this is a proven paid category. <span class="tag warn">⚠ a recorded-sample budget is parked — free libraries or synthesis only.</span></p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#191</span><span class="name">Chart-to-guitar performance</span><span class="tag star">★</span></div><p>Give it a ChordPro chart and a style ("90s alt-rock, jangly, capo 4"); get a realistic, humanized part with correct voicings and positions. Reads your song instead of making you pick patterns.</p></div>
+    <div class="card"><div class="head"><span class="num">#192</span><span class="name">Notation → performance renderer</span></div><p>Import MusicXML or a tab file; get a rendered performance with humanized timing, position-based timbre and legato/slide noise. Game-changer for composers and tab-video channels.</p></div>
+    <div class="card"><div class="head"><span class="num">#193</span><span class="name">Adaptive comping instrument</span></div><p>A virtual guitarist that <b>follows you</b> — your tempo, your dynamics, your changes — and comps underneath in real time. Hard to build; the demo alone would break the internet.</p></div>
+    <div class="card"><div class="head"><span class="num">#194</span><span class="name">Guitar → tab on your own takes</span><span class="tag star">★ deep dive above</span></div><p>Play, get a clean playable tab of what you actually played. Legally clean and personally useful — the opposite direction from everyone else in AI transcription.</p></div>
+    <div class="card"><div class="head"><span class="num">#195</span><span class="name">Producer guitar-in-a-box</span></div><p>For producers who don't play guitar: genre + era + role + a reference track → a convincing part with tone, constrained by guitar-idiomatic rules. Huge market (bedroom pop, hip-hop, sync).</p></div>
+    <div class="card"><div class="head"><span class="num">#196</span><span class="name">Impossible-part preventer</span></div><p>Flags fret spans a human can't reach and suggests capo/tuning alternatives. Ships as a plugin or an API for virtual-instrument makers.</p></div>
+    <div class="card"><div class="head"><span class="num">#197</span><span class="name">Performance-to-practice loop</span></div><p>Your DAW take → tab of what you played + timing/sloppiness report + tomorrow's practice loops built from your actual mistakes.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- PLUGINS D ---------- -->
+<section id="plugins-d" class="cat"><div class="wrap">
+  <h2><span class="hs">Group N &middot; 198–202, 219–224</span>Plugins — Live, Workflow &amp; Practice</h2>
+  <p class="cat-intro"><b>What this group is:</b> everything that happens around the playing — setlists, sessions, practice, teacher flows. <b>Why it fits €0:</b> local processing, open formats, community data. <b>Money later:</b> gigging musicians and teachers pay monthly.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#198</span><span class="name">Setlist-first rig host</span></div><p>A simple, web-configured live host for a 40-song covers gig: per-song patches, tempo, notes, lyrics, footswitch navigation. <span class="tag warn">⚠ ambitious; deep-power hosts already exist</span></p></div>
+    <div class="card"><div class="head"><span class="num">#199</span><span class="name">Setlist → tone auto-builder</span></div><p>Import your setlist; get a preset per song matched to the recorded tone, with pickup and volume-knob notes. "Sound like the record" in one click per song.</p></div>
+    <div class="card"><div class="head"><span class="num">#200</span><span class="name">Practice-coach plugin</span><span class="tag star">★</span></div><p>Inside your DAW: each take scored against the click (timing distribution, bend accuracy, dynamics), history stored, tomorrow's loop itinerary built. Rehearsal becomes measurable.</p></div>
+    <div class="card"><div class="head"><span class="num">#201</span><span class="name">Studio guitar QC plugin</span></div><p>Scans a tracking session and reports tuning drift, hum changes, clipping, string-noise trends and inconsistent attack, as a written report for the producer.</p></div>
+    <div class="card"><div class="head"><span class="num">#202</span><span class="name">Portable tone-patch standard</span></div><p>An open format describing an intended guitar sound — amp, cab, mic, settings, FX order, gain staging — independent of vendor, with converters. Standards plays are slow but whoever lands it owns the interchange layer.</p></div>
+    <div class="card"><div class="head"><span class="num">#219</span><span class="name">AI-tab fidelity checker</span><span class="tag star">★ deep dive above</span></div><p>Scores AI-generated tabs for accuracy <em>and</em> playability, then repairs. The validator every AI transcription wave eventually needs.</p></div>
+    <div class="card"><div class="head"><span class="num">#220</span><span class="name">Cross-vendor preset hub</span><span class="tag star">★ deep dive above</span></div><p>Community parameter maps + a converter assistant that flags what it can't translate. Your moat is thousands of verified mappings, not code.</p></div>
+    <div class="card"><div class="head"><span class="num">#221</span><span class="name">Foot-controller mapping OS</span></div><p>Auto-map any plugin's parameters to any MIDI foot controller with shareable community mapping files. Mapping hell is universal and currently solved by forum threads.</p></div>
+    <div class="card"><div class="head"><span class="num">#222</span><span class="name">Setlist → device pack exporter</span><span class="tag star">★</span></div><p>One click: setlist in, device-ready tone packs out (NAM pedal / ToneX / your plugin), loudness-normalized (#185), with tempo and notes. Built entirely on free open infrastructure.</p></div>
+    <div class="card"><div class="head"><span class="num">#223</span><span class="name">Practice overlay for any recording</span></div><p>One window: stem isolation (free local Demucs), slow-down, loop trainer, optional AI tab overlay with confidence marks, notation export. Nobody merges practice with transcription confidence.</p></div>
+    <div class="card"><div class="head"><span class="num">#224</span><span class="name">Teacher's tone-as-assignment</span></div><p>A teacher ships a tone chain plus tasks; the student records takes in-app and the teacher sees scored attempts before the lesson. A tone chain becomes homework.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- PLUGINS E ---------- -->
+<section id="plugins-e" class="cat"><div class="wrap">
+  <h2><span class="hs">Group O &middot; 204–207, 225, 227, 229, 231</span>Plugins — Market, Meta &amp; B2B</h2>
+  <p class="cat-intro"><b>What this group is:</b> the economy around plugins — buying, licensing, testing, learning. <b>Why it fits €0:</b> local tools, community data, free CI. <b>Money later:</b> B2B and affiliate — some of the most reliable revenue in this whole bank. <span class="tag warn">⚠ #203, the license resale marketplace, is parked: escrow and transfer legalities need real money and lawyers.</span></p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#204</span><span class="name">License locker &amp; migration assistant</span></div><p>Scans your machine, catalogs every plugin license, tracks which machine each lives on, warns before OS upgrades and generates the deactivation checklist. A pure painkiller.</p></div>
+    <div class="card"><div class="head"><span class="num">#205</span><span class="name">Subscription optimizer</span></div><p>Tracks what you rent, estimates cost per actual use from your sessions, and tells you which subscriptions to cancel. Cost tools pay for themselves, so they convert.</p></div>
+    <div class="card"><div class="head"><span class="num">#207</span><span class="name">Preset market with in-browser audition</span></div><p>Hear any preset pack on a standard DI before buying, filtered by guitar, pickup and genre. Today preset packs are blind Zip files and a YouTube demo.</p></div>
+    <div class="card"><div class="head"><span class="num">#225</span><span class="name">Plugin CI/QA dashboard <span class="kbd">B2B</span></span></div><p>Automated plugin validation across formats, DAWs and operating systems via free CI, with crash telemetry and a compatibility matrix. Every indie dev rebuilds this badly.</p></div>
+    <div class="card"><div class="head"><span class="num">#227</span><span class="name">Plugin / preset ROI tracker</span></div><p>Usage vs. spend dashboard for everything you own and rent. Turns subscription fatigue into a decision with numbers.</p></div>
+    <div class="card"><div class="head"><span class="num">#229</span><span class="name">Pedal-circuit sandbox</span></div><p>Modular distortion design with component-level mods, a plain-language explainer of each change, and a community marketplace of user-designed dirt boxes. Education + ecosystem.</p></div>
+    <div class="card"><div class="head"><span class="num">#231</span><span class="name">Modeler onboarding courseware <span class="kbd">B2B</span></span></div><p>Interactive "learn your modeler in three hours" courses for the big hardware ecosystems, sold to the makers as official onboarding and to users as certification.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- TRUST ---------- -->
+<section id="trust" class="cat"><div class="wrap">
+  <h2><span class="hs">Group P &middot; 169, 170, 188, 206, 230</span>Trust, Data &amp; Standards</h2>
+  <p class="cat-intro"><b>What this group is:</b> the slow-compounding plays — open formats, public data, honest testing. <b>Why it fits €0:</b> community data, offline tests, static hosting. <b>Money later:</b> brands pay for credibility; embedders pay for hosting and analytics. These earn trust, and trust is the scarcest thing in the AI-flooded guitar market.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#169</span><span class="name">Open tab format + viewer SDK</span><span class="tag star">★ deep dive above</span></div><p>Format + metadata + embeddable viewer on top of the open alphaTab engine, so any independent site can host playable, properly-licensed tabs in one line of code.</p></div>
+    <div class="card"><div class="head"><span class="num">#170</span><span class="name">Guitar genome</span></div><p>Crowdsourced spec database for every model: neck profile, weight, scale length, hardware — linked later to the pickup library (#71) and tone references. Built over years; becomes the reference everyone cites.</p></div>
+    <div class="card"><div class="head"><span class="num">#188</span><span class="name">ABX blind-test rack</span></div><p>A plugin that runs proper blind comparisons with statistics over repeated trials and a public results database. Settles forum arguments with data.</p></div>
+    <div class="card"><div class="head"><span class="num">#206</span><span class="name">Blind-test plugin finder</span></div><p>Purchase decisions via standardized blind comparisons against your current setup: "what you'd actually gain." Affiliate revenue that earns trust precisely because it's blind.</p></div>
+    <div class="card"><div class="head"><span class="num">#230</span><span class="name">Certified blind-test service <span class="kbd">B2B</span></span></div><p>Brands pay for rigorous public blind tests of their products vs. competitors, with published methodology. Nobody in guitar audio is the RTINGS-grade authority yet.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- CONSTRAINT-BORN ---------- -->
+<section id="extra" class="cat"><div class="wrap">
+  <h2><span class="hs">Group Q &middot; 232–236</span>Born From The €0 Constraint</h2>
+  <p class="cat-intro"><b>What this group is:</b> ideas that only exist <em>because</em> you can't spend money. The constraint stopped being a limitation and became the design brief.</p>
+  <div class="grid">
+    <div class="card"><div class="head"><span class="num">#232</span><span class="name">Local-first songbook organizer</span></div><p>All your charts, PDFs and screenshots in the browser, offline, no account, no server. You pay €0 per user forever; privacy becomes the marketing.</p></div>
+    <div class="card"><div class="head"><span class="num">#233</span><span class="name">Crowdsourced data engine</span></div><p>Pick ONE dataset (PD arrangements, gear specs, NAM preset maps, tone references) and let users build your moat. Content costs nothing and compounds.</p></div>
+    <div class="card"><div class="head"><span class="num">#234</span><span class="name">Zero-marginal-cost freemium</span></div><p>Architecture as product: all heavy processing on-device, so free users literally cost €0. You can be generous and ad-free forever — which is exactly why people will choose you over the ad-riddled incumbents.</p></div>
+    <div class="card"><div class="head"><span class="num">#235</span><span class="name">Sponsored free access</span></div><p>Free for every player, paid for by brands and teachers: "this week's practice challenge is sponsored by [gear shop]." Zero cost to you, zero cost to users, real revenue.</p></div>
+    <div class="card"><div class="head"><span class="num">#236</span><span class="name">Public-domain teaching academy</span></div><p>Old method books (Sor, Carcassi, Aguado) turned into an interactive free course track, with teachers contributing exercises for credit. No licenses, evergreen SEO.</p></div>
+  </div>
+</div></section>
+
+<!-- ---------- PARKED ---------- -->
+<section id="parked"><div class="wrap">
+  <h2><span class="hs">Section 04</span>⛔ The parked list — 23 ideas that need money</h2>
+  <p class="lead">Parked, not deleted. Each one is a good idea with a price tag attached — revisit when revenue exists. This is also your anti-distraction list: if an idea smells like one of these, walk away for now.</p>
+  <table>
+    <tr><th>#</th><th>Idea</th><th>Why it's parked</th></tr>
+    <tr><td class="num">29, 32</td><td>Tab annotation site, tab error detection on other sites' tabs</td><td>Hosting/verifying copyrighted transcriptions → licensing budget + legal exposure</td></tr>
+    <tr><td class="num">46, 47</td><td>Pro tab marketplace with escrow, transcription bounties</td><td>Escrow, compliance and copyright exposure from paid transcription</td></tr>
+    <tr><td class="num">52</td><td>"Name that riff" quiz using real songs</td><td>Music clip rights</td></tr>
+    <tr><td class="num">71</td><td>Pickup comparison library (as originally scoped)</td><td>You'd have to buy the pickups, guitar and mics. <b>Reshaped version is live</b> (crowdsourced, users record their own)</td></tr>
+    <tr><td class="num">91</td><td>Licensed backing-track marketplace</td><td>Publisher and master licenses</td></tr>
+    <tr><td class="num">121</td><td>Method-book companion app</td><td>Book licenses from publishers</td></tr>
+    <tr><td class="num">141, 142</td><td>P2P gear rental marketplace, studio backline rental</td><td>Deposits, insurance and damage waivers are financial/legal infrastructure</td></tr>
+    <tr><td class="num">149</td><td>Tab karaoke with real songs</td><td>Sync licenses</td></tr>
+    <tr><td class="num">157</td><td>Practice pot with real-money stakes</td><td>Payment handling + gambling-law territory</td></tr>
+    <tr><td class="num">159–162, 164</td><td>Practice sensor, smart pick, hardware foot controller, tension band, smart capo</td><td>Physical hardware: bills of materials, tooling, stock</td></tr>
+    <tr><td class="num">167, 168</td><td>Synced printed journal, parent subscription box</td><td>Printing and physical logistics</td></tr>
+    <tr><td class="num">203</td><td>Plugin license resale marketplace</td><td>Escrow, transfer legalities, developer agreements — trust infrastructure you must fund</td></tr>
+    <tr><td class="num">208, 217</td><td>Hex/per-string processing, hex harmony engine</td><td>Developer needs hex-pickup hardware to test</td></tr>
+    <tr><td class="num">228</td><td>GPU capture-runner / GPU plugin chains</td><td>GPU compute costs; free tiers can't sustain it</td></tr>
+    <tr><td class="num">38</td><td>Worship multitrack player (the content half)</td><td>Multitrack licenses. <b>The transposer tool half lives on as #37.</b></td></tr>
+  </table>
+
+  <h3>Reduced — live, but in a smaller form</h3>
+  <table>
+    <tr><th>#</th><th>Full idea</th><th>What survives at €0</th></tr>
+    <tr><td class="num">67</td><td>IR manager &amp; marketplace</td><td>Local IR organizer and auditioning tool; selling packs goes through free storefronts (fees only on sale)</td></tr>
+    <tr><td class="num">74</td><td>Pedal price watch with deal scoring</td><td>Watch public listings with free email alerts; skip paid data feeds</td></tr>
+    <tr><td class="num">104</td><td>Virtual open mic platform</td><td>Run sessions on free video platforms; you build the scheduling and audience layer</td></tr>
+    <tr><td class="num">106</td><td>Gig marketplace with payments</td><td>Directory + lead-gen only; money-handling stays parked</td></tr>
+  </table>
+</div></section>
+
+<!-- ---------- STACK ---------- -->
+<section id="stack"><div class="wrap">
+  <h2><span class="hs">Section 05</span>The €0 stack — every tool verified free</h2>
+  <p class="lead">Everything you need to build any idea in this bank, with zero money. Local-first beats cloud every time: it's cheaper to run, faster to ship, and better for audio.</p>
+  <div class="two">
+    <div class="panel">
+      <h3 style="margin-top:0">Code &amp; apps</h3>
+      <ul class="clean">
+        <li><b>Editor:</b> VS Code</li>
+        <li><b>Version control:</b> Git + GitHub (free private repos, free CI minutes on public repos)</li>
+        <li><b>Languages:</b> Python, TypeScript/Node, Rust (for WASM)</li>
+        <li><b>Web framework:</b> SvelteKit / React / Solid + Vite</li>
+        <li><b>Styling:</b> Tailwind</li>
+        <li><b>App shape:</b> PWA (installable, offline) + IndexedDB/SQLite = no backend bill</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">Audio</h3>
+      <ul class="clean">
+        <li><b>Engine:</b> Web Audio API + AudioWorklet, Tone.js</li>
+        <li><b>Tabs:</b> alphaTab (MPL-2.0) — render + play Guitar Pro files</li>
+        <li><b>Notation:</b> VexFlow</li>
+        <li><b>Theory:</b> Tonal.js</li>
+        <li><b>Backing tracks:</b> FluidSynth + CC0 soundfonts</li>
+        <li><b>Transcription:</b> Spotify Basic Pitch (Apache-2.0)</li>
+        <li><b>Stems:</b> Demucs (MIT) — local, short clips, no cloud GPU</li>
+        <li><b>Pitch:</b> YIN / CREPE</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">Plugins &amp; amp tech</h3>
+      <ul class="clean">
+        <li><b>Frameworks:</b> iPlug2 (MIT) or DPF (ISC) — skip commercial JUCE</li>
+        <li><b>Formats:</b> VST3 + CLAP + LV2 (skip AAX)</li>
+        <li><b>Amp modeling:</b> NAM (MIT, CPU inference, "nano/feather" sizes)</li>
+        <li><b>Capture training:</b> TONE3000 free cloud trainer + free plugin</li>
+        <li><b>Licensing:</b> simple offline license files — no iLok</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">Backend, only if truly needed</h3>
+      <ul class="clean">
+        <li><b>Hosting:</b> Cloudflare Pages/Workers, Vercel, GitHub Pages (free tiers)</li>
+        <li><b>Database:</b> Supabase / Neon / Turso free tiers</li>
+        <li><b>Storage:</b> Cloudflare R2 / Backblaze B2 (10 GB free)</li>
+        <li><b>Email:</b> Resend / Brevo free tiers</li>
+        <li><b>B2B basics:</b> Google Sheets + Forms for scheduling and invoicing — genuinely fine at the start</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">Design &amp; marketing</h3>
+      <ul class="clean">
+        <li><b>Design:</b> Figma free, Inkscape, GIMP, Krita</li>
+        <li><b>Social assets:</b> Canva free</li>
+        <li><b>Type:</b> Inter (OFL)</li>
+        <li><b>Video:</b> OBS — free demos and tutorial clips</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">Money-in — €0 upfront, fees only on sales</h3>
+      <ul class="clean">
+        <li><b>Storefronts:</b> Gumroad, itch.io</li>
+        <li><b>Payments:</b> Stripe Payment Links</li>
+        <li><b>Tips/support:</b> Ko-fi, GitHub Sponsors, Patreon</li>
+        <li><b>B2B:</b> invoice directly — no infrastructure required</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout"><b>Free-tier survival rules:</b> local-first &gt; cloud · static &gt; server · on-device &gt; API · PWA &gt; native app · public repo for free CI · one free tier per layer, with a plan to swap.</div>
+</div></section>
+
+<!-- ---------- COSTS ---------- -->
+<section id="costs"><div class="wrap">
+  <h2><span class="hs">Section 06</span>Costs that only appear if it <em>works</em></h2>
+  <p class="lead">Plan for these, fear none of them. Every one is post-revenue and avoidable until then.</p>
+  <table>
+    <tr><th>Cost</th><th>Amount</th><th>When it's worth paying</th><th>Until then</th></tr>
+    <tr><td>Domain name</td><td>~€10 / year</td><td>When you put a link on business cards or ads</td><td>Free <code>*.github.io</code> or <code>*.pages.dev</code></td></tr>
+    <tr><td>Apple developer account</td><td>$99 / year</td><td>Only if iOS/macOS distribution becomes important</td><td>Web app / PWA first (Linux, Windows, macOS all covered)</td></tr>
+    <tr><td>Windows code signing</td><td>~€100+ / year</td><td>Only if download warnings hurt conversions</td><td>Web version + clear install instructions</td></tr>
+    <tr><td>Hosting overage</td><td>varies</td><td>Only at real traffic</td><td>Local-first architecture keeps marginal cost ≈ €0</td></tr>
+    <tr><td>Storefront fees</td><td>% per sale</td><td>Only when someone pays you</td><td>—</td></tr>
+  </table>
+</div></section>
+
+<footer><div class="wrap">
+  <p class="big">Everything in this bank ships as <b>PC software — a web app and/or a desktop app</b>. Web app: open a link, nothing to install. Desktop app: install it, keep your files local, run offline. One codebase, two deliveries, €0 to build.</p>
+  <p class="hint">236 ideas invented across four research passes (apps · websites · tools · plugins) → 23 parked for budget → ~210 live. Sources: the 2026 guitar software landscape (learning platforms, tab sites, AI audio tools, capture ecosystems, plugin markets, teacher/luthier tooling) plus gap analysis from the reviews, forums and subreddits those products leave behind. Compiled 29 September 2026.</p>
+  <p class="hint">Nothing is rendered. Nothing is final. Pick one number and build it.</p>
+</div></footer>
+
+<script>
+(function(){
+  var q = document.getElementById('q');
+  var count = document.getElementById('count');
+  if(!q) return;
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.cat'));
+  function run(){
+    var v = q.value.trim().toLowerCase();
+    var shown = 0;
+    cards.forEach(function(c){
+      var hit = !v || c.textContent.toLowerCase().indexOf(v) > -1;
+      c.style.display = hit ? '' : 'none';
+      if(hit) shown++;
+    });
+    sections.forEach(function(s){
+      var any = Array.prototype.some.call(s.querySelectorAll('.card'), function(c){ return c.style.display !== 'none'; });
+      s.style.display = any ? '' : 'none';
+    });
+    count.textContent = v ? shown + ' matching idea' + (shown === 1 ? '' : 's') : cards.length + ' ideas';
+  }
+  q.addEventListener('input', run);
+  run();
+})();
+</script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a42d05437d288a17',t:'MTc5MDcwNjIyMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
