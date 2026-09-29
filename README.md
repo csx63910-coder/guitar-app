@@ -60,6 +60,21 @@ Guitar Toolkit features **all Tier 1 applications live, tested, and fully functi
 - **Hands-Free Auto-Scroll:** Adjustable speed slider (1–10) with play/pause controls.
 - Color-coded section tags (Verse, Chorus, Bridge, Solo), font scaling (14px–32px), and real-time transposition.
 
+### 10. #209 Device-Targeted NAM Hardware-Optimizer (`/tools/nam-optimizer/`)
+- Analyzes and downscales Neural Amp Modeler (`.nam`) captures for specific hardware units (Hotone Ampero II, Valeton GP-200, HeadRush Prime, MOD Dwarf).
+- Calculates DSP load percentages, memory footprint, and buffer latency.
+- Calibrates input gain to industry standard -18.0 dBFS with exportable hardware flash manifests.
+
+### 11. #219 AI-Tab Fidelity & Playability Checker (`/tools/tab-fidelity-checker/`)
+- Quality validator and "spell-check" for AI transcription models (Klangio, Songscription, Basic Pitch).
+- Evaluates hand stretches and flags physically impossible fret spans (> 5 frets) and high-velocity string jumps.
+- Automated ergonomic repairs to collapse unplayable fret groupings into human-playable hand boxes.
+
+### 12. #220 Cross-Vendor Preset Portability Hub (`/tools/preset-portability-hub/`)
+- Cross-vendor parameter mapping dictionary between **Line 6 Helix**, **Neural DSP Quad Cortex**, **Fractal Axe-Fx III**, and **Kemper Profiler**.
+- Equivalent amp model lookup (BE-100, JCM800, Twin Reverb, Rectifier, AC30).
+- Non-linear gain and presence taper translations with explicit flags for untranslatable proprietary DSP features.
+
 ---
 
 1. **€0 Budget:** Built exclusively with open-source tools, free hosting tiers, and on-device processing. No paid APIs, cloud GPUs, domains, or app-store fees.

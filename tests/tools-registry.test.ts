@@ -48,6 +48,9 @@ describe('Tool Registry Validation', () => {
     expect(liveNumbers).toContain(75);  // Gear Flips Tracker
     expect(liveNumbers).toContain(134); // Collection Manager
     expect(liveNumbers).toContain(95);  // Lyric & Chord Sheet Designer
+    expect(liveNumbers).toContain(209); // NAM Hardware Optimizer
+    expect(liveNumbers).toContain(219); // AI-Tab Fidelity Checker
+    expect(liveNumbers).toContain(220); // Preset Portability Hub
   });
 });
 
