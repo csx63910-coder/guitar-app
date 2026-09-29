@@ -111,12 +111,13 @@
 <header class="hero">
   <div class="wrap">
     <span class="chip">PC SOFTWARE &middot; WEB APP + DESKTOP APP</span>
+    <span class="chip" style="color:var(--teal);border-color:rgba(88,196,183,.45)">PERSONAL USE</span>
     <h1>IDEAS <span class="thin">/ the zero-budget bank</span></h1>
-    <p class="sub">236 guitar software ideas — invented, researched, filtered to the ones you can actually build with <b>€0</b>: no paid tools, no licenses, no hardware, no servers. Each idea explained, with what it is, how it works, and where money comes later.</p>
+    <p class="sub">236 guitar software ideas — invented, researched, filtered to the ones you can actually build with <b>€0</b>: no paid tools, no hardware, no servers, and <b>personal use throughout</b> — any music you have is fair game for your own builds, and open-source or personal-use tools are all approved. Each idea explained, with what it is, how it works, and where money comes later.</p>
     <div class="stats">
       <div class="stat"><b>236</b><span>ideas invented</span></div>
-      <div class="stat"><b>23</b><span>parked (need money)</span></div>
-      <div class="stat"><b>~210</b><span>live &amp; buildable at €0</span></div>
+      <div class="stat"><b>20</b><span>parked (need money)</span></div>
+      <div class="stat"><b>216</b><span>live &amp; buildable at €0</span></div>
       <div class="stat"><b>12</b><span>deep dives below</span></div>
     </div>
 
@@ -129,12 +130,14 @@
         <li><b>Desktop App</b> — install it on your PC. Runs fully offline, keeps your files on your own machine, no server bills for the builder.</li>
       </ul>
       <p style="margin:0"><b>Why desktop matters here:</b> guitar software works with audio, and audio belongs on your machine. A local-first desktop app can process stems, practice audio, tabs and recordings without anyone paying for cloud compute — which is exactly how these ideas stay free to build and free to run.</p>
+      <p style="margin:10px 0 0"><b>Content &amp; licences — personal-use edition:</b> this bank is built for <em>you</em>. Tools must permit personal use — open source (MIT, Apache, ISC, MPL), public domain and Creative Commons (including NC), or freeware marked "free for personal use". Music is your call: for a personal build there is no content restriction — point it at anything you have. The single line that remains: if a project ever goes to other people, the content inside it must be yours, PD, CC, crowd-sourced or user-supplied. Full policy in <a href="#licences">Section 02</a>.</p>
     </div>
   </div>
 </header>
 
 <nav class="toc"><div class="wrap">
   <a href="#rules">The €0 rules</a>
+  <a href="#licences">Licences</a>
   <a href="#deep">★ Deep dives</a>
   <a href="#practice">Practice</a>
   <a href="#tabs">Tabs &amp; notation</a>
@@ -161,15 +164,64 @@
   <div class="rules">
     <div class="rule"><span class="n">RULE 1</span><br><b>Build with free tools only.</b><br>Open source, free tiers, on-device processing. No paid APIs, no GPU rentals, no paid plugins, no hardware purchases, no sample-library budgets.</div>
     <div class="rule"><span class="n">RULE 2</span><br><b>Launch with €0.</b><br>Free hosting (GitHub Pages, Cloudflare, Vercel free tier), free subdomain. Web/PWA/desktop first — the $99/year app-store accounts and €10 domains can wait until revenue exists.</div>
-    <div class="rule"><span class="n">RULE 3</span><br><b>No licensed content.</b><br>Everything the product touches must be: yours, public domain, crowd-sourced, or the user's own files. This single rule kills every copyright problem before it starts.</div>
+    <div class="rule"><span class="n">RULE 3</span><br><b>Personal use — your content, your call.</b><br>Tools must permit personal use: open source, public domain, CC, or "free for personal use". Music: no content restriction for a personal build — your library, your files, whatever you practise with. The one line left: if a project ever goes to other people, what's inside it must be yours, PD, CC, crowd-sourced or user-supplied.</div>
   </div>
   <div class="callout"><b>The plugin extra-rules:</b> build with iPlug2 (MIT) or DPF (ISC) — not commercial JUCE. Ship VST3 + CLAP + LV2, skip AAX. No iLok. CPU inference only (NAM "nano/feather" architectures run on CPU). Capture training via TONE3000's free cloud trainer — never rent a GPU. Distribute from your own page + free storefronts (fees only when you actually sell).</div>
   <p class="hint">Legend: <span class="tag star">★ top pick</span> <span class="tag warn">⚠ reshaped / caveat</span> <span class="tag free">€0</span></p>
 </div></section>
 
+<!-- ================= LICENCES ================= -->
+<section id="licences"><div class="wrap">
+  <h2><span class="hs">Section 02</span>Content &amp; licensing — the personal-use edition</h2>
+  <p class="lead">This bank is for <em>you</em>, so two things change at once. <b>Tools:</b> the test is personal use, not commercial use — freeware you could never legally ship in a paid product is fine here. <b>Music:</b> there is no content restriction on your side at all — point your builds at any music you have. One page of policy, and it's done.</p>
+
+  <h3>✅ Approved — use it freely</h3>
+  <table>
+    <tr><th>Licence type</th><th>Personal build</th><th>Notes &amp; examples in this bank</th></tr>
+    <tr><td><b>Any music you have</b></td><td>✅ your call</td><td>Analyse, slow down, transpose, loop, transcribe, store — whatever you practise with, from your own library. That is what Transcribe!, Moises, Chordify and every practice tool get used for daily. (Media from streaming services is a separate matter of <em>their</em> terms, not copyright — genuinely two different questions.)</td></tr>
+    <tr><td><b>Public domain</b></td><td>✅ anything</td><td>Old method books (Sor, Carcassi, Aguado), traditional and folk tunes — the foundation of #27 and #236.</td></tr>
+    <tr><td><b>CC0</b></td><td>✅ anything</td><td>No conditions at all. Ideal for soundfonts and samples used in backing-track generation (#89).</td></tr>
+    <tr><td><b>CC BY / CC BY-SA</b></td><td>✅ with credit</td><td>Attribution is required and good manners; share-alike affects derivatives, normally fine for personal work.</td></tr>
+    <tr><td><b>CC BY-NC (non-commercial)</b></td><td>✅ personal use</td><td>Approved under this policy.</td></tr>
+    <tr><td><b>MIT · Apache-2.0 · BSD · ISC</b></td><td>✅ anything</td><td>Nearly the whole core stack: VexFlow, Tonal.js, Tone.js, Basic Pitch, Demucs, NAM, DPF.</td></tr>
+    <tr><td><b>MPL-2.0 · LGPL</b></td><td>✅ anything</td><td>File-level / library copyleft — alphaTab, FluidSynth. Obligations only matter if you redistribute modified versions.</td></tr>
+    <tr><td><b>GPL / AGPL</b></td><td>✅ personal use</td><td>Running it and building on it privately is unrestricted; obligations bite only if you distribute a modified version.</td></tr>
+    <tr><td><b>Freeware "for personal use"</b></td><td>✅ personal use</td><td>Free plugins, amp sims, virtual instruments, fonts, sample packs whose EULA permits personal use. Great for testing and for your own rig.</td></tr>
+    <tr><td><b>Free service tiers</b></td><td>✅ within ToS</td><td>GitHub, Cloudflare, Vercel, Supabase, TONE3000, Resend — free tiers for personal projects. Stay inside the published limits.</td></tr>
+  </table>
+
+  <h3>⛔ Still no — and why</h3>
+  <table>
+    <tr><th>Thing</th><th>Why</th></tr>
+    <tr><td>Cracked / keygen / "full version free download" software</td><td>Two practical reasons, zero lectures: illegal to obtain, and the single most reliable way to infect your own machine. Every tool this bank needs is free legitimately.</td></tr>
+    <tr><td>Time-limited trials and nagware demos</td><td>Not a licence for continued use. Fine to test a workflow, never to build on.</td></tr>
+    <tr><td>Student / education licences you don't qualify for</td><td>They get verified, and revocation mid-project is a real risk. The open equivalents are just as good.</td></tr>
+    <tr><td>Music you don't own inside something other people use</td><td>The only place the music question ever lands. Personal builds: your call, no restrictions. The moment a project goes to other people — published, sold, hosted for them — the content inside it has to be yours, PD, CC, crowd-sourced or user-supplied. Distribution is the whole line.</td></tr>
+  </table>
+
+  <div class="callout"><b>Personal vs. distributed — the one line left.</b> Personal use: no content restriction on your side. Your music, your files, your builds. The line moves only if the project ever goes to other people: then what's <em>inside</em> it must be yours, public domain, CC, crowd-sourced, or supplied by its users. That's it — everything else is yours to do with as you like.</div>
+
+  <h3>Already safe for a commercial pivot (in case that day comes)</h3>
+  <p class="cat-intro">Good news: almost nothing in the core stack is personal-use-only. The libraries, frameworks and models are all open source, so they'd survive a switch to selling without changing a line. Only <b>add-on assets</b> would ever need swapping:</p>
+  <table>
+    <tr><th>If you added…</th><th>Swap to…</th></tr>
+    <tr><td>Freeware plugins/instruments marked "personal use only"</td><td>Open-source equivalents: NAM (MIT), Guitarix, Calf, CHOWDSP, free NAM captures</td></tr>
+    <tr><td>CC BY-NC sample packs or soundfonts</td><td>CC0 sources (public-domain sample archives)</td></tr>
+    <tr><td>Personal-use-only fonts</td><td>SIL OFL fonts — Inter is already the pick in the stack</td></tr>
+    <tr><td>"Personal use" free service tiers</td><td>Free tiers that allow commercial use, or paid upgrades funded by revenue</td></tr>
+    <tr><td>Music files used as demo/example content</td><td>Your own recordings, public domain, or user-supplied audio</td></tr>
+  </table>
+
+  <div class="panel">
+    <h3 style="margin-top:0">Bookkeeping that saves you later</h3>
+    <p style="margin:0 0 8px">Keep a single <code>LICENSES.txt</code> in your project folder. One line per asset: name, source link, licence type, date downloaded. Five minutes now keeps the build tidy and future-proof — if you ever publish, sell, or hand a project to someone else, the file is already done.</p>
+    <p style="margin:0"><b>Rule of thumb:</b> if you can't say in one sentence why you're allowed to use something, don't use it. Everything approved above fits in one sentence.</p>
+  </div>
+</div></section>
+
 <!-- ================= DEEP DIVES ================= -->
 <section id="deep"><div class="wrap">
-  <h2><span class="hs">Section 02</span>★ The twelve deep dives</h2>
+  <h2><span class="hs">Section 03</span>★ The twelve deep dives</h2>
   <p class="lead">The best twelve ideas for a zero-budget builder, explained properly: what it is, how it works, why it costs nothing, who pays later, and the first step.</p>
 
   <div class="deep">
@@ -330,7 +382,7 @@
 </div></section>
 <!-- ================= CATALOG ================= -->
 <section id="catalog-top"><div class="wrap">
-  <h2><span class="hs">Section 03</span>The live catalog — ~210 ideas, all €0-buildable</h2>
+  <h2><span class="hs">Section 04</span>The live catalog — ~210 ideas, all €0-buildable</h2>
   <p class="lead">Every surviving idea, explained in one or two sentences: what it does and why it holds up. Numbers match the research documents (parts 1–4). Use the search box to filter everything below.</p>
   <div class="searchbar">
     <input id="q" type="search" placeholder="Search all ideas… (e.g. microphone, teachers, NAM, backing, repair)" aria-label="Search ideas">
@@ -682,18 +734,15 @@
 
 <!-- ---------- PARKED ---------- -->
 <section id="parked"><div class="wrap">
-  <h2><span class="hs">Section 04</span>⛔ The parked list — 23 ideas that need money</h2>
+  <h2><span class="hs">Section 05</span>⛔ The parked list — 20 ideas that need money</h2>
   <p class="lead">Parked, not deleted. Each one is a good idea with a price tag attached — revisit when revenue exists. This is also your anti-distraction list: if an idea smells like one of these, walk away for now.</p>
   <table>
     <tr><th>#</th><th>Idea</th><th>Why it's parked</th></tr>
-    <tr><td class="num">29, 32</td><td>Tab annotation site, tab error detection on other sites' tabs</td><td>Hosting/verifying copyrighted transcriptions → licensing budget + legal exposure</td></tr>
     <tr><td class="num">46, 47</td><td>Pro tab marketplace with escrow, transcription bounties</td><td>Escrow, compliance and copyright exposure from paid transcription</td></tr>
-    <tr><td class="num">52</td><td>"Name that riff" quiz using real songs</td><td>Music clip rights</td></tr>
     <tr><td class="num">71</td><td>Pickup comparison library (as originally scoped)</td><td>You'd have to buy the pickups, guitar and mics. <b>Reshaped version is live</b> (crowdsourced, users record their own)</td></tr>
     <tr><td class="num">91</td><td>Licensed backing-track marketplace</td><td>Publisher and master licenses</td></tr>
     <tr><td class="num">121</td><td>Method-book companion app</td><td>Book licenses from publishers</td></tr>
     <tr><td class="num">141, 142</td><td>P2P gear rental marketplace, studio backline rental</td><td>Deposits, insurance and damage waivers are financial/legal infrastructure</td></tr>
-    <tr><td class="num">149</td><td>Tab karaoke with real songs</td><td>Sync licenses</td></tr>
     <tr><td class="num">157</td><td>Practice pot with real-money stakes</td><td>Payment handling + gambling-law territory</td></tr>
     <tr><td class="num">159–162, 164</td><td>Practice sensor, smart pick, hardware foot controller, tension band, smart capo</td><td>Physical hardware: bills of materials, tooling, stock</td></tr>
     <tr><td class="num">167, 168</td><td>Synced printed journal, parent subscription box</td><td>Printing and physical logistics</td></tr>
@@ -711,11 +760,22 @@
     <tr><td class="num">104</td><td>Virtual open mic platform</td><td>Run sessions on free video platforms; you build the scheduling and audience layer</td></tr>
     <tr><td class="num">106</td><td>Gig marketplace with payments</td><td>Directory + lead-gen only; money-handling stays parked</td></tr>
   </table>
+
+  <h3>🔄 Unlocked by the personal-use policy</h3>
+  <p class="cat-intro">With the music rule relaxed, these were blocked by <em>content</em>, not money. As personal, local builds — your files, nothing hosted for others — they cost €0 again:</p>
+  <table>
+    <tr><th>#</th><th>Idea</th><th>Personal-only form</th></tr>
+    <tr><td class="num">29</td><td>Tab annotator</td><td>Local annotation tool for your own tab copies. The hosted-for-others version stays parked.</td></tr>
+    <tr><td class="num">32</td><td>Tab error detection</td><td>Run it locally against your own files.</td></tr>
+    <tr><td class="num">52</td><td>"Name that riff" quiz</td><td>Build the quiz from your own library, for yourself.</td></tr>
+    <tr><td class="num">149</td><td>Tab karaoke</td><td>Private play-along sessions with your own music files.</td></tr>
+  </table>
+  <p class="hint">Everything else in the parked list is blocked by <b>money</b> — hardware, escrow, printing, licensing fees — not by content, so it stays parked under the €0 rule.</p>
 </div></section>
 
 <!-- ---------- STACK ---------- -->
 <section id="stack"><div class="wrap">
-  <h2><span class="hs">Section 05</span>The €0 stack — every tool verified free</h2>
+  <h2><span class="hs">Section 06</span>The €0 stack — every tool verified free</h2>
   <p class="lead">Everything you need to build any idea in this bank, with zero money. Local-first beats cloud every time: it's cheaper to run, faster to ship, and better for audio.</p>
   <div class="two">
     <div class="panel">
@@ -782,11 +842,12 @@
     </div>
   </div>
   <div class="callout"><b>Free-tier survival rules:</b> local-first &gt; cloud · static &gt; server · on-device &gt; API · PWA &gt; native app · public repo for free CI · one free tier per layer, with a plan to swap.</div>
+  <div class="callout"><b>Licence status of this stack:</b> the core is fully open source — MIT / Apache-2.0 / ISC / MPL-2.0 — so it qualifies for personal use <em>and</em> would survive a commercial pivot untouched. Any "free for personal use" extras you bolt on (freeware plugins, NC sample packs, personal-use fonts) are approved under <a href="#licences">Section 02</a>; the swap list there tells you what to replace if you ever sell.</div>
 </div></section>
 
 <!-- ---------- COSTS ---------- -->
 <section id="costs"><div class="wrap">
-  <h2><span class="hs">Section 06</span>Costs that only appear if it <em>works</em></h2>
+  <h2><span class="hs">Section 07</span>Costs that only appear if it <em>works</em></h2>
   <p class="lead">Plan for these, fear none of them. Every one is post-revenue and avoidable until then.</p>
   <table>
     <tr><th>Cost</th><th>Amount</th><th>When it's worth paying</th><th>Until then</th></tr>
@@ -800,7 +861,7 @@
 
 <footer><div class="wrap">
   <p class="big">Everything in this bank ships as <b>PC software — a web app and/or a desktop app</b>. Web app: open a link, nothing to install. Desktop app: install it, keep your files local, run offline. One codebase, two deliveries, €0 to build.</p>
-  <p class="hint">236 ideas invented across four research passes (apps · websites · tools · plugins) → 23 parked for budget → ~210 live. Sources: the 2026 guitar software landscape (learning platforms, tab sites, AI audio tools, capture ecosystems, plugin markets, teacher/luthier tooling) plus gap analysis from the reviews, forums and subreddits those products leave behind. Compiled 29 September 2026.</p>
+  <p class="hint">236 ideas invented across four research passes (apps · websites · tools · plugins) → 20 parked for budget → 216 live. Sources: the 2026 guitar software landscape (learning platforms, tab sites, AI audio tools, capture ecosystems, plugin markets, teacher/luthier tooling) plus gap analysis from the reviews, forums and subreddits those products leave behind. Compiled 29 September 2026.</p>
   <p class="hint">Nothing is rendered. Nothing is final. Pick one number and build it.</p>
 </div></footer>
 
@@ -829,5 +890,5 @@
   run();
 })();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a42d05437d288a17',t:'MTc5MDcwNjIyMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
