@@ -1,0 +1,23 @@
+{
+  "name": "guitar-toolkit",
+  "version": "1.0.0",
+  "description": "Guitar Toolkit — Personal zero-budget guitar software suite for PC",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "check": "svelte-kit sync && tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@fontsource/inter": "^5.2.5",
+    "@sveltejs/adapter-static": "^3.0.8",
+    "@sveltejs/kit": "^2.19.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "svelte": "^5.22.4",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0",
+    "vitest": "^3.0.7"
+  }
+}

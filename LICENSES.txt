@@ -1,0 +1,11 @@
+# Guitar Toolkit — Asset & Dependency Licenses
+# Rule: One line per asset (name, source link, license, date verified)
+
+Svelte | https://github.com/sveltejs/svelte | MIT | 2026-09-29
+SvelteKit | https://github.com/sveltejs/kit | MIT | 2026-09-29
+@sveltejs/adapter-static | https://github.com/sveltejs/kit/tree/main/packages/adapter-static | MIT | 2026-09-29
+Vite | https://github.com/vitejs/vite | MIT | 2026-09-29
+Inter Font | https://github.com/rsms/inter | SIL Open Font License 1.1 (OFL) | 2026-09-29
+@fontsource/inter | https://github.com/fontsource/fontsource | MIT (Package) / OFL-1.1 (Fonts) | 2026-09-29
+Vitest | https://github.com/vitest-dev/vitest | MIT | 2026-09-29
+TypeScript | https://github.com/microsoft/TypeScript | Apache-2.0 | 2026-09-29

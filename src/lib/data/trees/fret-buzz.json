@@ -1,0 +1,315 @@
+{
+  "id": "fret-buzz",
+  "symptomName": "Fret Buzz & Rattle",
+  "catalogNumber": 131,
+  "shortDescription": "Metallic rattling, buzzing, or sitar-like notes when fretting or playing open strings.",
+  "startNodeId": "q_location",
+  "nodes": {
+    "q_location": {
+      "id": "q_location",
+      "title": "Buzz Location",
+      "question": "Where does the fret buzz happen most noticeably on your guitar?",
+      "measurementGuide": "Play notes chromatically up each string with normal picking force. Note where the buzz is clearest.",
+      "options": [
+        {
+          "label": "Open strings only (frets 0)",
+          "description": "Buzzes when plucked open, but goes away immediately when you press any fret.",
+          "nextNodeId": "q_open_details"
+        },
+        {
+          "label": "Low frets (Frets 1 to 5)",
+          "description": "Buzzes primarily on chords and notes near the headstock.",
+          "nextNodeId": "q_low_frets"
+        },
+        {
+          "label": "Upper frets (Frets 12 and above)",
+          "description": "Buzzes high up the neck or chokes out when bending notes.",
+          "nextNodeId": "q_high_frets"
+        },
+        {
+          "label": "One specific note / fret only",
+          "description": "All other notes ring clearly, but one individual fret buzzes or dies out.",
+          "nextNodeId": "q_single_fret"
+        },
+        {
+          "label": "Everywhere along the entire neck",
+          "description": "General rattling on almost every fret across all strings.",
+          "nextNodeId": "q_all_frets"
+        }
+      ]
+    },
+    "q_open_details": {
+      "id": "q_open_details",
+      "title": "Open String Buzz Test",
+      "question": "Does placing a folded strip of paper or business card in the nut slot temporarily stop the buzz?",
+      "measurementGuide": "Slide a tiny slip of paper under the buzzing string at the headstock nut, re-tune, and pluck gently.",
+      "options": [
+        {
+          "label": "Yes, the buzz disappears or improves",
+          "diagnosisId": "nut_slot_too_low"
+        },
+        {
+          "label": "No, it still buzzes at the bridge or tuner hardware",
+          "diagnosisId": "loose_hardware_bridge"
+        }
+      ]
+    },
+    "q_low_frets": {
+      "id": "q_low_frets",
+      "title": "Neck Relief Check",
+      "question": "When you fret the 1st fret with your left index finger and the last fret with your right pinky, is there a small gap under the string at the 7th fret?",
+      "measurementGuide": "Use a standard plastic credit card or business card at the 7th–8th fret as a feeler gauge. There should be a hair of space (approx 0.25mm - 0.35mm, about the thickness of a business card).",
+      "options": [
+        {
+          "label": "No gap at all — the string touches the 7th fret wire firmly (Backbow)",
+          "diagnosisId": "truss_rod_too_tight"
+        },
+        {
+          "label": "Normal gap (business card slides through), but frets 1-3 still buzz",
+          "diagnosisId": "nut_slot_uneven_or_low_relief"
+        }
+      ]
+    },
+    "q_high_frets": {
+      "id": "q_high_frets",
+      "title": "Bridge Saddle Height & Upper Relief",
+      "question": "How high are your strings above the 12th fret wire without pressing down?",
+      "measurementGuide": "Place a ruler on top of the 12th fret wire. Standard low-medium electric action is around 1.5mm - 2.0mm (approx thickness of 1 to 2 standard guitar picks).",
+      "options": [
+        {
+          "label": "Strings are lower than 1.2mm (very close to frets)",
+          "diagnosisId": "bridge_saddles_too_low"
+        },
+        {
+          "label": "Normal action height, but notes choke out during bends past fret 12",
+          "diagnosisId": "fretboard_fallaway_or_radius"
+        }
+      ]
+    },
+    "q_single_fret": {
+      "id": "q_single_fret",
+      "title": "Fret Level Rocker Test",
+      "question": "Does a short straightedge (like the edge of a credit card bridging only 3 frets) rock back and forth over the buzzing fret?",
+      "measurementGuide": "Spanning exactly 3 frets with a rigid edge. If it rocks like a seesaw, the center fret is high.",
+      "options": [
+        {
+          "label": "Yes, it rocks distinctly over the fret directly ahead",
+          "diagnosisId": "high_individual_fret"
+        },
+        {
+          "label": "No rocking, but there is a visible indentation or groove in the fret wire",
+          "diagnosisId": "worn_fret_grooves"
+        }
+      ]
+    },
+    "q_all_frets": {
+      "id": "q_all_frets",
+      "title": "Overall Action & Tuning Environment",
+      "question": "Did this buzz start suddenly after a season/humidity change or changing string gauges?",
+      "measurementGuide": "Check if strings were down-gauged (e.g. 10s to 9s which decreases tension) or weather became dry.",
+      "options": [
+        {
+          "label": "Yes, recently changed strings or weather changed drastically",
+          "diagnosisId": "tension_drop_season_shift"
+        },
+        {
+          "label": "No change, guitar has simply become unplayable everywhere",
+          "diagnosisId": "full_setup_needed"
+        }
+      ]
+    }
+  },
+  "diagnoses": {
+    "nut_slot_too_low": {
+      "id": "nut_slot_too_low",
+      "title": "Nut Slot Cut Too Deep or Worn Down",
+      "severity": "medium",
+      "confidence": "High",
+      "rankedCauses": [
+        "Nut slot wear from string friction over time",
+        "Nut slot filed too aggressively during a previous setup",
+        "String gauge swapped to a thinner diameter that sits too deep in the slot"
+      ],
+      "fixOrder": [
+        "Temporary check: Place a tiny strip of folded foil or paper under the string in the nut slot.",
+        "Quick fix: The 'baking soda + thin superglue' or bone dust drop method to build up the slot floor, then re-file carefully with a needle file.",
+        "Permanent fix: Replace the nut with a pre-slotted Graph Tech TUSQ or bone nut."
+      ],
+      "measurementsRequired": [
+        "Fret the string between the 2nd and 3rd frets. Check clearance over the 1st fret: you should see a tiny gap (about 0.15mm, thickness of a sheet of printer paper)."
+      ],
+      "whenToConsultLuthier": "If you don't own proper nut slotting files, cutting a new nut from a blank requires precision tools to prevent intonation problems."
+    },
+    "truss_rod_too_tight": {
+      "id": "truss_rod_too_tight",
+      "title": "Truss Rod Over-Tightened (Neck Backbow)",
+      "severity": "low",
+      "confidence": "High",
+      "rankedCauses": [
+        "Truss rod has too much tension, causing the neck to bow backward toward the strings",
+        "Drop in ambient humidity causing fingerboard shrinkage and neck pull",
+        "Down-tuning or installing lighter gauge strings with less pull against the rod"
+      ],
+      "fixOrder": [
+        "Identify truss rod location (headstock or neck heel).",
+        "Loosen the truss rod by turning Counter-Clockwise (lefty-loosey) by exactly 1/8 to 1/4 of a turn.",
+        "Retune to pitch and let the wood settle for 15-30 minutes.",
+        "Re-check low fret clearance with the credit-card / business-card feeler test."
+      ],
+      "measurementsRequired": [
+        "Capo on fret 1, hold down fret 17. Measure gap at fret 7. Ideal relief: 0.25mm - 0.35mm (standard business card)."
+      ],
+      "whenToConsultLuthier": "If the truss rod nut feels completely stuck, does not turn with gentle pressure, or spins freely without gripping."
+    },
+    "bridge_saddles_too_low": {
+      "id": "bridge_saddles_too_low",
+      "title": "Bridge Saddles Set Too Low",
+      "severity": "low",
+      "confidence": "High",
+      "rankedCauses": [
+        "Bridge height adjustment screws vibrated lower over time",
+        "Action was set too low in pursuit of easy fretting without accounting for string vibration arc"
+      ],
+      "fixOrder": [
+        "Loosen the buzzing string slightly to reduce tension on the saddle screw.",
+        "Use the appropriate hex wrench (usually 1.5mm or 0.050\") to raise both saddle height screws by 1/4 to 1/2 turn clockwise.",
+        "Tune to pitch and check frets 12-21 again.",
+        "Match the bridge saddle curvature to the fretboard radius."
+      ],
+      "measurementsRequired": [
+        "Height from top of 12th fret wire to bottom of string: 1.6mm (High E) to 2.0mm (Low E) for standard electric."
+      ],
+      "whenToConsultLuthier": "If bridge saddles are already raised to their maximum limit and string action is still too low (indicates neck angle issue requiring a neck pocket shim)."
+    },
+    "high_individual_fret": {
+      "id": "high_individual_fret",
+      "title": "High or Unseated Fret Wire",
+      "severity": "medium",
+      "confidence": "High",
+      "rankedCauses": [
+        "Fret wire popped out of its slot due to wood contraction in dry weather",
+        "Uneven factory fret leveling"
+      ],
+      "fixOrder": [
+        "Inspect the fret end near the fretboard edge to see if it has lifted out of the slot.",
+        "If lifted: Support the neck underneath, protect the fret with a brass punch or wooden block, and tap gently to re-seat it.",
+        "If fully seated but still high: Mark fret top with dry-erase marker and level/crown using a fret leveling file."
+      ],
+      "measurementsRequired": [
+        "Fret rocker test across 3 frets: center fret should have zero rocking motion."
+      ],
+      "whenToConsultLuthier": "Fret dressing, leveling, and recrowning requires dedicated crowning files and crowning guards to avoid creating dead spots."
+    },
+    "worn_fret_grooves": {
+      "id": "worn_fret_grooves",
+      "title": "Deep Fret Wear Grooves",
+      "severity": "medium",
+      "confidence": "Medium",
+      "rankedCauses": [
+        "Thousands of hours of string bending in favorite positions (commonly frets 1-3 for open chords or 12-15 for blues bends)"
+      ],
+      "fixOrder": [
+        "Check fret height: if frets have sufficient remaining height (> 1.0mm), a partial or full fret level, crown, and polish will restore smooth playability.",
+        "If frets are worn down almost to the wood (< 0.7mm), a partial or complete refret is required."
+      ],
+      "measurementsRequired": [
+        "Visual inspection under direct light showing divots or flat-topped trapezoidal fret crowns."
+      ],
+      "whenToConsultLuthier": "Refretting is a specialized workshop procedure."
+    },
+    "loose_hardware_bridge": {
+      "id": "loose_hardware_bridge",
+      "title": "Sympathetic Hardware Vibration",
+      "severity": "low",
+      "confidence": "Medium",
+      "rankedCauses": [
+        "Loose tuner ferrule or washer buzzing against headstock",
+        "Saddle intonation spring rattling",
+        "Pickguard screw or pickup height spring loose"
+      ],
+      "fixOrder": [
+        "Touch various hardware parts (tuning pegs, bridge springs, truss rod cover) while plucking the open string.",
+        "When the buzzing stops upon touching a specific part, tighten that specific screw or place a drop of foam/tape underneath."
+      ],
+      "measurementsRequired": [
+        "None (auditory isolation test)."
+      ],
+      "whenToConsultLuthier": "Rarely needed unless a bridge casting has an internal hairline fracture."
+    },
+    "fretboard_fallaway_or_radius": {
+      "id": "fretboard_fallaway_or_radius",
+      "title": "Upper Fret Rise or Radius Choke",
+      "severity": "medium",
+      "confidence": "Medium",
+      "rankedCauses": [
+        "The neck joint area (where neck bolts/glues to body) has swollen or risen slightly higher than the rest of the neck (fretboard tongue rise)",
+        "Vintage 7.25\" fretboard radius choking out high whole-step string bends"
+      ],
+      "fixOrder": [
+        "Slightly raise the bridge saddle of the choking string.",
+        "Introduce a tiny amount of neck relief loosening the truss rod 1/8 turn.",
+        "For vintage radius guitars: slightly higher action above fret 12 is physically required to clear bent strings."
+      ],
+      "measurementsRequired": [
+        "Test full step bends on frets 12, 14, 15 on High E and B strings."
+      ],
+      "whenToConsultLuthier": "Adding deliberate fallaway (shaving frets 15-22 slightly lower on the treble side) is a standard luthier setup procedure."
+    },
+    "nut_slot_uneven_or_low_relief": {
+      "id": "nut_slot_uneven_or_low_relief",
+      "title": "Insufficient Neck Relief Combined With Low Nut",
+      "severity": "low",
+      "confidence": "Medium",
+      "rankedCauses": [
+        "Neck is too straight (nearly zero relief) combined with aggressively cut nut slots"
+      ],
+      "fixOrder": [
+        "Loosen truss rod 1/8 turn counter-clockwise to allow the natural string tension to create a gentle forward curve.",
+        "Retune and check frets 1 through 5."
+      ],
+      "measurementsRequired": [
+        "Target 0.25mm (0.010 inch) neck relief at fret 7."
+      ],
+      "whenToConsultLuthier": "If relief is correct and 1st fret still buzzes on one string."
+    },
+    "tension_drop_season_shift": {
+      "id": "tension_drop_season_shift",
+      "title": "Seasonal Humidity Shift / Tension Drop",
+      "severity": "low",
+      "confidence": "High",
+      "rankedCauses": [
+        "Winter heating dried out the guitar neck, flattening or backbowing the fingerboard",
+        "Switching from heavier to lighter string gauge"
+      ],
+      "fixOrder": [
+        "Inspect case humidity (aim for 45% - 55% RH).",
+        "Perform a 1/4 turn truss rod adjustment (counter-clockwise to add relief).",
+        "Let guitar acclimate for 24 hours in a humidified environment."
+      ],
+      "measurementsRequired": [
+        "Neck relief check at 7th fret."
+      ],
+      "whenToConsultLuthier": "If acoustic guitar top has sunken significantly from dry climate."
+    },
+    "full_setup_needed": {
+      "id": "full_setup_needed",
+      "title": "Comprehensive Setup Required",
+      "severity": "medium",
+      "confidence": "Medium",
+      "rankedCauses": [
+        "Multiple interacting parameters out of spec (truss rod, nut slots, saddle radius, and intonation)"
+      ],
+      "fixOrder": [
+        "Follow the standard four-step setup order (T-R-A-I):",
+        "1. Tune to pitch.",
+        "2. Relief: adjust truss rod to 0.25mm at fret 7.",
+        "3. Action: adjust bridge saddles to 1.6mm - 2.0mm at fret 12.",
+        "4. Intonation: adjust saddle length so open note equals 12th fret harmonic."
+      ],
+      "measurementsRequired": [
+        "Ruler (mm/64ths), business card/feeler gauge, accurate electronic tuner."
+      ],
+      "whenToConsultLuthier": "If you prefer a professional bench setup or if fret leveling is suspected."
+    }
+  }
+}

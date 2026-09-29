@@ -1,0 +1,91 @@
+{
+  "id": "tuning-instability",
+  "symptomName": "Tuning Instability & Slipping",
+  "catalogNumber": 131,
+  "shortDescription": "Guitar goes out of tune quickly after bends, tremolo use, or temperature changes.",
+  "startNodeId": "q_tuning_trigger",
+  "nodes": {
+    "q_tuning_trigger": {
+      "id": "q_tuning_trigger",
+      "title": "When Does It Go Out of Tune?",
+      "question": "What action triggers the guitar to slip out of tune?",
+      "measurementGuide": "Tune accurately to pitch, then perform the suspected action and check the tuner readout.",
+      "options": [
+        {
+          "label": "After string bends (note returns FLAT, then goes sharp if tugged)",
+          "description": "Ping or 'plink' sound heard at the headstock while tuning or bending.",
+          "diagnosisId": "nut_slot_friction_binding"
+        },
+        {
+          "label": "Immediately on brand new strings",
+          "description": "Strings keep slipping flat continuously after being newly installed.",
+          "diagnosisId": "unstretched_strings_poor_winding"
+        },
+        {
+          "label": "After using the vibrato / tremolo bar",
+          "description": "Diving the whammy bar leaves strings flat; pulling up leaves them sharp.",
+          "diagnosisId": "tremolo_knife_edge_and_friction"
+        }
+      ]
+    }
+  },
+  "diagnoses": {
+    "nut_slot_friction_binding": {
+      "id": "nut_slot_friction_binding",
+      "title": "String Binding in Nut Slot (Friction Pinch)",
+      "severity": "low",
+      "confidence": "High",
+      "rankedCauses": [
+        "Nut slots are too tight for string gauge (90% of all electric tuning issues)",
+        "No lubrication in bone or plastic nut slots"
+      ],
+      "fixOrder": [
+        "Color inside the nut slot with a standard #2 graphite pencil (graphite is an excellent dry lubricant).",
+        "Or apply a tiny dab of dedicated guitar nut lubricant (e.g. Big Bends Nut Sauce).",
+        "Ensure string angle back to tuning post is clean without binding against slot edges."
+      ],
+      "measurementsRequired": [
+        "Check for audible 'plink' or sudden jump when tuning."
+      ],
+      "whenToConsultLuthier": "If nut slots need widening for heavier strings with professional nut files."
+    },
+    "unstretched_strings_poor_winding": {
+      "id": "unstretched_strings_poor_winding",
+      "title": "Strings Not Stretched or Loose Post Wraps",
+      "severity": "low",
+      "confidence": "High",
+      "rankedCauses": [
+        "New strings still have elasticity in core wire and winding wraps around tuning posts",
+        "Too many sloppy overlapping winds on the tuner peg"
+      ],
+      "fixOrder": [
+        "Gently grab each string around the 12th fret and pull upwards 1-2 inches with moderate pressure.",
+        "Retune to pitch and repeat until pulling the string no longer causes the pitch to drop.",
+        "On non-locking tuners, ensure 2-3 neat winds without overlaps."
+      ],
+      "measurementsRequired": [
+        "Tuner stability after 3 firm string stretches."
+      ],
+      "whenToConsultLuthier": "Not needed."
+    },
+    "tremolo_knife_edge_and_friction": {
+      "id": "tremolo_knife_edge_and_friction",
+      "title": "Tremolo Bridge Pivot Friction or Claw Imbalance",
+      "severity": "medium",
+      "confidence": "High",
+      "rankedCauses": [
+        "Strat 2-point or Floyd Rose knife edges have burrs or lack lubrication at post contact points",
+        "String tree on headstock causing string drag after bar dive"
+      ],
+      "fixOrder": [
+        "Lubricate tremolo pivot knife-edges with synthetic lubricant.",
+        "Lubricate underside of string tree guides on headstock.",
+        "Ensure tremolo claw screws are balanced so bridge returns to consistent rest position."
+      ],
+      "measurementsRequired": [
+        "Measure bridge float gap above body before and after tremolo dive."
+      ],
+      "whenToConsultLuthier": "If knife edges are deeply pitted and require filing or bridge replacement."
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "id": "high-action",
+  "symptomName": "High Action & Stiff Fretting",
+  "catalogNumber": 131,
+  "shortDescription": "Strings feel excessively high off the fretboard, requiring painful finger pressure to fret chords.",
+  "startNodeId": "q_action_location",
+  "nodes": {
+    "q_action_location": {
+      "id": "q_action_location",
+      "title": "Where Action Feels Hardest",
+      "question": "Where on the neck does fretting feel the most uncomfortably high and stiff?",
+      "measurementGuide": "Try an open F major barre chord at fret 1, then play chords at fret 12.",
+      "options": [
+        {
+          "label": "At the 1st fret (Open F barre chord hurts hand)",
+          "description": "Fretting near the nut takes excessive force; notes go sharp when pressed.",
+          "diagnosisId": "nut_slots_too_high"
+        },
+        {
+          "label": "In the middle of the neck (Frets 5 to 9)",
+          "description": "Strings bow dramatically away from the fretboard like an archery bow.",
+          "diagnosisId": "excessive_neck_relief"
+        },
+        {
+          "label": "High up the neck (Frets 12 and above)",
+          "description": "Action gets progressively higher toward the body and bridge.",
+          "diagnosisId": "bridge_saddles_too_high"
+        }
+      ]
+    }
+  },
+  "diagnoses": {
+    "nut_slots_too_high": {
+      "id": "nut_slots_too_high",
+      "title": "Nut Slots Cut Too Shallow",
+      "severity": "medium",
+      "confidence": "High",
+      "rankedCauses": [
+        "Factory nut left intentionally tall for safe transport",
+        "Replacement nut installed without final slot depth dressing"
+      ],
+      "fixOrder": [
+        "Fret the 3rd fret and observe clearance between string bottom and 1st fret wire.",
+        "Clearance should be almost touching (approx 0.15mm, thickness of paper).",
+        "Carefully deepen slots with appropriate gauge nut files angled slightly back toward tuners."
+      ],
+      "measurementsRequired": [
+        "Fret 3rd fret: check 1st fret clearance (0.15mm)."
+      ],
+      "whenToConsultLuthier": "Filing nut slots too deep causes open string buzz and requires replacing the nut."
+    },
+    "excessive_neck_relief": {
+      "id": "excessive_neck_relief",
+      "title": "Excessive Neck Relief (Forward Bow)",
+      "severity": "low",
+      "confidence": "High",
+      "rankedCauses": [
+        "Truss rod too loose against string tension",
+        "High humidity causing neck wood to swell into forward bow"
+      ],
+      "fixOrder": [
+        "Tighten truss rod clockwise (righty-tighty) by 1/4 turn.",
+        "Allow neck 15 minutes to adjust, retune to pitch, and recheck action."
+      ],
+      "measurementsRequired": [
+        "Capo fret 1, hold fret 17, check gap at fret 7 (target 0.25mm - 0.35mm)."
+      ],
+      "whenToConsultLuthier": "If truss rod cannot turn or feels stripped."
+    },
+    "bridge_saddles_too_high": {
+      "id": "bridge_saddles_too_high",
+      "title": "Bridge Saddles / Acoustic Saddle Set Too High",
+      "severity": "low",
+      "confidence": "High",
+      "rankedCauses": [
+        "Bridge height thumbscrews or saddle screws set too high",
+        "Acoustic saddle bone blank not sanded down to correct height"
+      ],
+      "fixOrder": [
+        "For electrics: lower saddle screws or bridge posts by 1/2 turn counter-clockwise.",
+        "For acoustics: mark bottom of bone saddle, sand bottom evenly on flat sandpaper surface (sanding 1mm off saddle lowers 12th fret action by 0.5mm)."
+      ],
+      "measurementsRequired": [
+        "12th fret string height: Electric 1.6-2.0mm, Acoustic 2.0-2.5mm."
+      ],
+      "whenToConsultLuthier": "If bridge saddles are bottomed out and neck angle requires a neck reset or pocket shim."
+    }
+  }
+}
