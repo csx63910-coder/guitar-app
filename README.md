@@ -6,7 +6,36 @@ The project follows a **Website-First** architecture: one unified web hub that h
 
 ---
 
-## ⚡ Non-Negotiable Core Principles
+## 🎸 Live Applications in the Toolkit
+
+Guitar Toolkit currently features **4 fully functional, offline-capable live applications** from Tier 1 of the build ladder:
+
+### 1. #131 Repair Diagnostic Wizard (`/tools/repair-wizard/`)
+- Interactive decision-tree troubleshooter for guitar hardware problems.
+- 3 full symptom trees: **Fret Buzz & Rattle**, **High Action & Stiff Fretting**, and **Tuning Instability & Slipping**.
+- Plain-language measurement guides (credit card, business card, and pick thickness).
+- Print-ready diagnosis and fix instruction sheet.
+
+### 2. #83 Pedalboard Cost & Power Planner (`/tools/pedalboard-planner/`)
+- Accurately calculates total mA current draw across analog and digital stompboxes.
+- Power supply capacity checks against isolated multi-output units (Strymon, Voodoo Lab, Truetone, Cioks).
+- **Daisy Chain & Digital Noise Warnings:** Alerts if high-current digital DSP pedals share a daisy chain with analog drives (preventing digital clock whine).
+- Patch cable calculator (N pedals = N-1 cables) and complete budget breakdown.
+- Exportable Markdown build sheet + local persistence.
+
+### 3. #80 String-Life & Maintenance Tracker (`/tools/string-life-tracker/`)
+- Multi-guitar stable management (Electric, Acoustic, Bass, Classical).
+- Tracks coated vs uncoated string sets with play hours logging (+30 min, +1 hr, +2 hrs).
+- **Tone & Intonation Fatigue Engine:** Alerts when strings pass their sweet spot and enter harmonic loss or fret wire wear danger zones.
+- Complete restringing history per instrument.
+
+### 4. #37 + #39 Nashville Number & Capo Intelligence (`/tools/nns-capo-converter/`)
+- Two-way chord chart converter: Chords &harr; Nashville Number System (NNS).
+- Real-time semitone transposition engine.
+- **Capo Intelligence Engine:** Computes optimal capo positions to match a singer's key using comfortable open chord shapes (C, G, D, A, E).
+- Interactive SVG Guitar Fretboard visualizer displaying capo clamp and string notes.
+
+---
 
 1. **€0 Budget:** Built exclusively with open-source tools, free hosting tiers, and on-device processing. No paid APIs, cloud GPUs, domains, or app-store fees.
 2. **Personal Use:** Your content, your music, your files. Any audio or tabs you own are fair game for personal builds.

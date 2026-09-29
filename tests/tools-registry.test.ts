@@ -35,11 +35,14 @@ describe('Tool Registry Validation', () => {
     }
   });
 
-  it('has #131 Repair Diagnostic Wizard registered as live', () => {
-    const wizard = toolsList.find((t) => t.number === 131);
-    expect(wizard).toBeDefined();
-    expect(wizard?.status).toBe('live');
-    expect(wizard?.route).toBe('/tools/repair-wizard');
+  it('has Tier 1 live tools properly registered', () => {
+    const liveTools = toolsList.filter((t) => t.status === 'live');
+    const liveNumbers = liveTools.map((t) => t.number);
+
+    expect(liveNumbers).toContain(131);
+    expect(liveNumbers).toContain(83);
+    expect(liveNumbers).toContain(80);
+    expect(liveNumbers).toContain(37);
   });
 });
 

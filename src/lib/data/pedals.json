@@ -1,0 +1,345 @@
+{
+  "pedals": [
+    {
+      "id": "polytune3",
+      "name": "TC Electronic PolyTune 3",
+      "brand": "TC Electronic",
+      "category": "Tuner",
+      "circuit": "digital",
+      "voltage": 9,
+      "current_mA": 100,
+      "price": 99,
+      "width_mm": 72,
+      "depth_mm": 122
+    },
+    {
+      "id": "tu3",
+      "name": "Boss TU-3 Chromatic Tuner",
+      "brand": "Boss",
+      "category": "Tuner",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 85,
+      "price": 109,
+      "width_mm": 73,
+      "depth_mm": 129
+    },
+    {
+      "id": "ts9",
+      "name": "Ibanez TS9 Tube Screamer",
+      "brand": "Ibanez",
+      "category": "Overdrive",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 8,
+      "price": 109,
+      "width_mm": 74,
+      "depth_mm": 124
+    },
+    {
+      "id": "bd2",
+      "name": "Boss BD-2 Blues Driver",
+      "brand": "Boss",
+      "category": "Overdrive",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 20,
+      "price": 119,
+      "width_mm": 73,
+      "depth_mm": 129
+    },
+    {
+      "id": "klon_klone",
+      "name": "Electro-Harmonix Soul Food (Klon)",
+      "brand": "Electro-Harmonix",
+      "category": "Overdrive",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 22,
+      "price": 98,
+      "width_mm": 70,
+      "depth_mm": 115
+    },
+    {
+      "id": "ds1",
+      "name": "Boss DS-1 Distortion",
+      "brand": "Boss",
+      "category": "Distortion",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 10,
+      "price": 62,
+      "width_mm": 73,
+      "depth_mm": 129
+    },
+    {
+      "id": "rat2",
+      "name": "ProCo Rat 2",
+      "brand": "ProCo",
+      "category": "Distortion",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 5,
+      "price": 89,
+      "width_mm": 84,
+      "depth_mm": 103
+    },
+    {
+      "id": "bigmuff",
+      "name": "Electro-Harmonix Big Muff Pi (Nano)",
+      "brand": "Electro-Harmonix",
+      "category": "Fuzz",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 5,
+      "price": 95,
+      "width_mm": 70,
+      "depth_mm": 115
+    },
+    {
+      "id": "fuzzface",
+      "name": "Dunlop Fuzz Face Mini (Germanium)",
+      "brand": "Dunlop",
+      "category": "Fuzz",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 4,
+      "price": 149,
+      "width_mm": 89,
+      "depth_mm": 89
+    },
+    {
+      "id": "dynacomp",
+      "name": "MXR Dyna Comp Compressor",
+      "brand": "MXR",
+      "category": "Dynamics",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 5,
+      "price": 99,
+      "width_mm": 60,
+      "depth_mm": 111
+    },
+    {
+      "id": "crybaby",
+      "name": "Dunlop GCB95 Cry Baby Wah",
+      "brand": "Dunlop",
+      "category": "Filter",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 3,
+      "price": 119,
+      "width_mm": 102,
+      "depth_mm": 254
+    },
+    {
+      "id": "phase90",
+      "name": "MXR Phase 90",
+      "brand": "MXR",
+      "category": "Modulation",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 8,
+      "price": 109,
+      "width_mm": 60,
+      "depth_mm": 111
+    },
+    {
+      "id": "ce2w",
+      "name": "Boss CE-2W Waza Craft Chorus",
+      "brand": "Boss",
+      "category": "Modulation",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 25,
+      "price": 229,
+      "width_mm": 73,
+      "depth_mm": 129
+    },
+    {
+      "id": "dd8",
+      "name": "Boss DD-8 Digital Delay",
+      "brand": "Boss",
+      "category": "Delay",
+      "circuit": "digital",
+      "voltage": 9,
+      "current_mA": 65,
+      "price": 179,
+      "width_mm": 73,
+      "depth_mm": 129
+    },
+    {
+      "id": "carboncopy",
+      "name": "MXR Carbon Copy Analog Delay",
+      "brand": "MXR",
+      "category": "Delay",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 26,
+      "price": 169,
+      "width_mm": 60,
+      "depth_mm": 111
+    },
+    {
+      "id": "timeline",
+      "name": "Strymon TimeLine Delay",
+      "brand": "Strymon",
+      "category": "Delay",
+      "circuit": "digital",
+      "voltage": 9,
+      "current_mA": 300,
+      "price": 449,
+      "width_mm": 171,
+      "depth_mm": 130
+    },
+    {
+      "id": "bigsky",
+      "name": "Strymon BigSky Reverb",
+      "brand": "Strymon",
+      "category": "Reverb",
+      "circuit": "digital",
+      "voltage": 9,
+      "current_mA": 300,
+      "price": 479,
+      "width_mm": 171,
+      "depth_mm": 130
+    },
+    {
+      "id": "halloffame2",
+      "name": "TC Electronic Hall of Fame 2 Reverb",
+      "brand": "TC Electronic",
+      "category": "Reverb",
+      "circuit": "digital",
+      "voltage": 9,
+      "current_mA": 100,
+      "price": 139,
+      "width_mm": 72,
+      "depth_mm": 122
+    },
+    {
+      "id": "whammy5",
+      "name": "DigiTech Whammy 5th Gen",
+      "brand": "DigiTech",
+      "category": "Pitch",
+      "circuit": "digital",
+      "voltage": 9,
+      "current_mA": 265,
+      "price": 219,
+      "width_mm": 160,
+      "depth_mm": 203
+    },
+    {
+      "id": "micro_pog",
+      "name": "Electro-Harmonix Micro POG",
+      "brand": "Electro-Harmonix",
+      "category": "Pitch",
+      "circuit": "digital",
+      "voltage": 9,
+      "current_mA": 180,
+      "price": 225,
+      "width_mm": 102,
+      "depth_mm": 121
+    },
+    {
+      "id": "ocd",
+      "name": "Fulltone OCD v2 (18V Capable)",
+      "brand": "Fulltone",
+      "category": "Overdrive",
+      "circuit": "analog",
+      "voltage": 18,
+      "current_mA": 15,
+      "price": 169,
+      "width_mm": 60,
+      "depth_mm": 115
+    },
+    {
+      "id": "smartgate",
+      "name": "MXR M135 Smart Gate",
+      "brand": "MXR",
+      "category": "Utility",
+      "circuit": "analog",
+      "voltage": 9,
+      "current_mA": 18,
+      "price": 149,
+      "width_mm": 60,
+      "depth_mm": 111
+    }
+  ],
+  "power_supplies": [
+    {
+      "id": "truetone_cs7",
+      "name": "Truetone 1 SPOT Pro CS7",
+      "isolated": true,
+      "outputs_count": 7,
+      "total_mA": 1900,
+      "price": 139,
+      "notes": "7 isolated outputs (1x 18V 100mA, 4x 9V 200mA, 2x 9V/12V 500mA)"
+    },
+    {
+      "id": "strymon_zuma",
+      "name": "Strymon Zuma Ultra High Power",
+      "isolated": true,
+      "outputs_count": 9,
+      "total_mA": 4500,
+      "price": 299,
+      "notes": "9 isolated outputs with 500mA per output (2 switchable 9/12/18V)"
+    },
+    {
+      "id": "voodoo_pp2",
+      "name": "Voodoo Lab Pedal Power 2 Plus",
+      "isolated": true,
+      "outputs_count": 8,
+      "total_mA": 1100,
+      "price": 199,
+      "notes": "8 isolated outputs (toroidal transformer, 2x 250mA, 6x 100mA)"
+    },
+    {
+      "id": "cioks_dc7",
+      "name": "CIOKS DC7",
+      "isolated": true,
+      "outputs_count": 7,
+      "total_mA": 4600,
+      "price": 249,
+      "notes": "7 isolated outlets, each 660mA at 9V or switchable 9/12/15/18V"
+    },
+    {
+      "id": "daisy_chain_pack",
+      "name": "Basic 9V Daisy Chain Adapter (Non-Isolated)",
+      "isolated": false,
+      "outputs_count": 8,
+      "total_mA": 1000,
+      "price": 25,
+      "notes": "Budget non-isolated daisy chain. High risk of digital whine with DSP pedals."
+    }
+  ],
+  "pedalboards": [
+    {
+      "id": "pedaltrain_nano",
+      "name": "Pedaltrain Nano+",
+      "width_mm": 457,
+      "depth_mm": 127,
+      "price": 69
+    },
+    {
+      "id": "pedaltrain_metro16",
+      "name": "Pedaltrain Metro 16",
+      "width_mm": 406,
+      "depth_mm": 203,
+      "price": 89
+    },
+    {
+      "id": "pedaltrain_classic2",
+      "name": "Pedaltrain Classic 2",
+      "width_mm": 609,
+      "depth_mm": 317,
+      "price": 149
+    },
+    {
+      "id": "rockboard_tres31",
+      "name": "Rockboard TRES 3.1",
+      "width_mm": 510,
+      "depth_mm": 236,
+      "price": 109
+    }
+  ]
+}
