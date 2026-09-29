@@ -39,10 +39,15 @@ describe('Tool Registry Validation', () => {
     const liveTools = toolsList.filter((t) => t.status === 'live');
     const liveNumbers = liveTools.map((t) => t.number);
 
-    expect(liveNumbers).toContain(131);
-    expect(liveNumbers).toContain(83);
-    expect(liveNumbers).toContain(80);
-    expect(liveNumbers).toContain(37);
+    expect(liveNumbers).toContain(131); // Repair Diagnostic Wizard
+    expect(liveNumbers).toContain(83);  // Pedalboard Cost & Power Planner
+    expect(liveNumbers).toContain(80);  // String-Life Tracker
+    expect(liveNumbers).toContain(37);  // Nashville Number & Capo Intelligence
+    expect(liveNumbers).toContain(132); // Serial Number Decoder
+    expect(liveNumbers).toContain(44);  // Chord Chart Cleaner & Formatter
+    expect(liveNumbers).toContain(75);  // Gear Flips Tracker
+    expect(liveNumbers).toContain(134); // Collection Manager
+    expect(liveNumbers).toContain(95);  // Lyric & Chord Sheet Designer
   });
 });
 

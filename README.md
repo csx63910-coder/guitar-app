@@ -8,7 +8,7 @@ The project follows a **Website-First** architecture: one unified web hub that h
 
 ## 🎸 Live Applications in the Toolkit
 
-Guitar Toolkit currently features **4 fully functional, offline-capable live applications** from Tier 1 of the build ladder:
+Guitar Toolkit features **all Tier 1 applications live, tested, and fully functional offline**:
 
 ### 1. #131 Repair Diagnostic Wizard (`/tools/repair-wizard/`)
 - Interactive decision-tree troubleshooter for guitar hardware problems.
@@ -34,6 +34,31 @@ Guitar Toolkit currently features **4 fully functional, offline-capable live app
 - Real-time semitone transposition engine.
 - **Capo Intelligence Engine:** Computes optimal capo positions to match a singer's key using comfortable open chord shapes (C, G, D, A, E).
 - Interactive SVG Guitar Fretboard visualizer displaying capo clamp and string notes.
+
+### 5. #132 Serial Number Decoder & Counterfeit Checker (`/tools/serial-decoder/`)
+- Brand-specific algorithmic decoders for **Gibson**, **Fender** (USA, Mexico, Japan JV, AVRI), **Martin**, and **Ibanez**.
+- Checks against a curated registry of infamous counterfeit serials (e.g. Chibson 017160628).
+- Highlights critical physical authenticity flags (bridge post diameter, truss rod nut cavity, wood vs plastic plugs).
+
+### 6. #44 Chord Chart Cleaner & Lead Sheet Formatter (`/tools/chord-chart-cleaner/`)
+- Parser converting messy forum tabs and ChordPro notation into clean, aligned lead sheets.
+- Eliminates trailing whitespace, cleans chords over lyrics, and aligns chord tokens.
+- Instant transposition (+1, -1, +N semitones) and one-click ChordPro / Clean Text export.
+
+### 7. #75 Gear Flips & Trading Accounting Tracker (`/tools/gear-flips-tracker/`)
+- Full trading ledger calculating gross sales, platform fees (Reverb 8.2%, eBay 13.25%, zero-fee local cash), shipping, and repairs.
+- **Hourly Wage Sanity Check:** Compares time spent (driving, photographing, messaging, packing) against net profit to calculate true realized hourly wage.
+- Summary portfolio metrics: Total Net Profit, Capital Invested, and ROI%.
+
+### 8. #134 Guitar Collection Manager & Insurance Schedule (`/tools/collection-manager/`)
+- Private digital vault for instruments, vintage amplifiers, and boutique pedals.
+- Tracks purchase dates, cost basis, condition grade, serial numbers, and replacement appraisals.
+- **Printable Insurance Schedule (`window.print()`):** Generates an official, clutter-free tabular schedule formatted specifically for homeowner / instrument floater insurance policy riders.
+
+### 9. #95 Stage Lyric & Chord Sheet Designer (`/tools/lyric-sheet-designer/`)
+- High-contrast stage charts designed for iPad, tablets, and stage monitors.
+- **Hands-Free Auto-Scroll:** Adjustable speed slider (1–10) with play/pause controls.
+- Color-coded section tags (Verse, Chorus, Bridge, Solo), font scaling (14px–32px), and real-time transposition.
 
 ---
 

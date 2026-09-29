@@ -1,0 +1,42 @@
+{
+  "known_counterfeits": [
+    {
+      "serial": "017160628",
+      "brand": "Gibson",
+      "reason": "Infamous counterfeit serial used on thousands of Chinese fake Les Pauls (Chibsons). Usually stamped with incorrect font depth and crooked headstock alignment."
+    },
+    {
+      "serial": "017160629",
+      "brand": "Gibson",
+      "reason": "Known counterfeit batch number commonly found on replica Les Paul Customs with slotted bridge posts."
+    },
+    {
+      "serial": "02005558",
+      "brand": "Gibson",
+      "reason": "Mass-produced fake serial stamped on counterfeit Gibson Supreme and Custom models."
+    },
+    {
+      "serial": "US10123456",
+      "brand": "Fender",
+      "reason": "Sequential generic number found on budget imported counterfeit Stratocasters with plastic truss rod inserts."
+    }
+  ],
+  "fender_plants": {
+    "V": "Corona, California, USA (American Vintage Reissue)",
+    "US": "Corona, California, USA (Standard / Professional / Ultra series)",
+    "DZ": "Corona, California, USA (American Deluxe 2000s)",
+    "MN": "Ensenada, Baja California, Mexico (1990s)",
+    "MZ": "Ensenada, Baja California, Mexico (2000s)",
+    "MX": "Ensenada, Baja California, Mexico (2010s-Present)",
+    "JV": "Fujigen Gakki, Japan (Japanese Vintage 1982-1984)",
+    "E": "Fujigen Gakki, Japan (1984-1987) or Fullerton/Corona USA (1980s)",
+    "CIJ": "Crafted in Japan (Tokai Gakki or Dyna Gakki)",
+    "MIJ": "Made in Japan (Fujigen Gakki or Dyna Gakki)"
+  },
+  "gibson_plants": {
+    "kalamazoo": "Kalamazoo, Michigan (Original plant, closed 1984)",
+    "nashville": "Nashville, Tennessee (Main USA electric plant, opened 1974)",
+    "memphis": "Memphis, Tennessee (Semi-hollow ES plant, 2000-2019)",
+    "bozeman": "Bozeman, Montana (Acoustic division, 1989-Present)"
+  }
+}
