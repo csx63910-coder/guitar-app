@@ -8,7 +8,7 @@ The project follows a **Website-First** architecture: one unified web hub that h
 
 ## 🎸 Live Applications in the Toolkit
 
-Guitar Toolkit features **37 applications live, tested, and fully functional offline** across utilities, maintenance, practice, audio DSP, and modeling:
+Guitar Toolkit features **44 applications live, tested, and fully functional offline** across utilities, maintenance, practice, audio DSP, and modeling:
 
 ### 1. #131 Repair Diagnostic Wizard (`/tools/repair-wizard/`)
 - Interactive decision-tree troubleshooter for guitar hardware problems.
@@ -198,6 +198,41 @@ Guitar Toolkit features **37 applications live, tested, and fully functional off
 ### 37. #119 Student Repertoire & Progress Roadmap (`/tools/student-roadmap/`)
 - Private guitar teacher roster manager with skill proficiency radar (open chords, barre chords, picking, pentatonics).
 - Repertoire progress tracker (Learning &rarr; Polishing &rarr; Mastered) and weekly practice homework assignment logger with printable assignment sheets.
+
+### 38. #23 Performance-Pressure Simulator (`/tools/pressure-simulator/`)
+- Realistic crowd chatter & murmur ambience (Dive Bar, Coffeehouse, Arena, Audition Room).
+- Random surprise distractions (dropped beer glasses, ringing smartphones, feedback squeals, premature applause).
+- Flashing red-light studio panic mode with strict "no restarts / play through errors" stage rule.
+
+### 39. #40 Alternative Tuning Chord & Drone Library (`/tools/alt-tunings/`)
+- Comprehensive chord charts and string maps for DADGAD, Open G (Keith Richards / Stones), Open D (Slide), and Drop D.
+- Continuous ambient acoustic tanpura/Celtic drone synthesizer sustaining root and 5th harmonics during practice.
+- Built-in audio strum previews.
+
+### 40. #16 Barre Chord Survival & Strength Gym (`/tools/barre-chord-gym/`)
+- Biomechanical leverage training (shoulder pull vs. thumb pinch) and bony index finger radial roll ergonomics.
+- Interactive 6-string knuckle clarity diagnostic pinpointing exact finger joint pressure weak spots.
+- 30-second isometric hold endurance timer.
+
+### 41. #15 Fingerstyle & Travis Picking Bootcamp (`/tools/fingerstyle-bootcamp/`)
+- Alternating bass thumb independence trainer (P-I-M-A classical notation).
+- Curated patterns: Folk Pinch (Dust in the Wind), Chet Atkins Outside-In Roll, and Celtic 6/8 Harp Cascade.
+- Interactive animated tab grid with synchronized audio plucks and tempo slider.
+
+### 42. #9 Triad Inversion Visual Trainer (`/tools/triad-inversions/`)
+- Root Position, 1st Inversion, and 2nd Inversion voicings across Strings 1-2-3 (melody) and Strings 2-3-4 (funk/rhythm).
+- Interactive SVG fretboard diagrams with color-coded Root, 3rd, and 5th intervals.
+- Audio arpeggiator and flashcard quiz mode with score tracking.
+
+### 43. #5 Guitarist Weakness Radar & Skill Assessment (`/tools/weakness-radar/`)
+- 5-axis self-grading test battery evaluating Rhythm & Pocket, Barre Stamina, Fretboard Recall, Bend Accuracy, and Picking Speed.
+- Pure SVG vector spider/radar chart visualizer plotting your skill polygon.
+- Algorithmic bottleneck identifier with personalized 20-minute daily practice prescription.
+
+### 44. #109 Rehearsal Audio Splitter & Song Marker (`/tools/rehearsal-splitter/`)
+- Ingests full-length band rehearsals (MP3, WAV, OGG) and scans RMS energy waveforms.
+- Automatically divides continuous audio into discrete song takes using configurable silence threshold detection.
+- Per-take BPM, musical key, and notes tagging with direct playback audition.
 
 ---
 

@@ -84,7 +84,16 @@ describe('Tool Registry Validation', () => {
     expect(liveNumbers).toContain(137); // Luthier Workbench Toolkit
     expect(liveNumbers).toContain(119); // Student Repertoire & Progress Roadmap
 
-    expect(liveTools.length).toBe(37);
+    // Performance, Gym, & Rehearsal Tools
+    expect(liveNumbers).toContain(23);  // Performance-Pressure Simulator
+    expect(liveNumbers).toContain(40);  // Alternative Tuning Chord & Drone Library
+    expect(liveNumbers).toContain(16);  // Barre Chord Survival & Strength Gym
+    expect(liveNumbers).toContain(15);  // Fingerstyle & Travis Picking Bootcamp
+    expect(liveNumbers).toContain(9);   // Triad Inversion Visual Trainer
+    expect(liveNumbers).toContain(5);   // Guitarist Weakness Radar & Skill Assessment
+    expect(liveNumbers).toContain(109); // Rehearsal Audio Splitter & Song Marker
+
+    expect(liveTools.length).toBe(44);
   });
 });
 
