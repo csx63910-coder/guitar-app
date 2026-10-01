@@ -39,6 +39,7 @@ describe('Tool Registry Validation', () => {
     const liveTools = toolsList.filter((t) => t.status === 'live');
     const liveNumbers = liveTools.map((t) => t.number);
 
+    // All Tier 1 tools
     expect(liveNumbers).toContain(131); // Repair Diagnostic Wizard
     expect(liveNumbers).toContain(83);  // Pedalboard Cost & Power Planner
     expect(liveNumbers).toContain(80);  // String-Life Tracker
@@ -51,6 +52,18 @@ describe('Tool Registry Validation', () => {
     expect(liveNumbers).toContain(209); // NAM Hardware Optimizer
     expect(liveNumbers).toContain(219); // AI-Tab Fidelity Checker
     expect(liveNumbers).toContain(220); // Preset Portability Hub
+
+    // All Tier 2 & Tier 3 Audio/DSP tools
+    expect(liveNumbers).toContain(58);  // Hearing Safety Meter
+    expect(liveNumbers).toContain(60);  // Bend Trainer
+    expect(liveNumbers).toContain(59);  // Intonation Diagnostic
+    expect(liveNumbers).toContain(3);   // Practice Logger
+    expect(liveNumbers).toContain(49);  // On-Instrument Ear Trainer
+    expect(liveNumbers).toContain(89);  // Backing Track Generator
+    expect(liveNumbers).toContain(194); // Guitar to Tab
+    expect(liveNumbers).toContain(27);  // PD Songbook Generator
+
+    expect(liveTools.length).toBe(20);
   });
 });
 

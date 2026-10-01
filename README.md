@@ -75,6 +75,46 @@ Guitar Toolkit features **all Tier 1 applications live, tested, and fully functi
 - Equivalent amp model lookup (BE-100, JCM800, Twin Reverb, Rectifier, AC30).
 - Non-linear gain and presence taper translations with explicit flags for untranslatable proprietary DSP features.
 
+### 13. #58 Volume & Hearing Safety Meter (`/tools/hearing-meter/`)
+- Real-time calibrated sound pressure level (dBA SPL) microphone monitor using Web Audio API.
+- Live **NIOSH / OSHA daily noise dose accumulator** tracking permissible exposure limits before permanent hearing damage.
+- Rehearsal benchmarks (acoustic guitar, drum kit, 50W cranked tube half-stack) with peak hold and custom microphone calibration.
+
+### 14. #60 String Bend Accuracy Trainer (`/tools/bend-trainer/`)
+- Pitch tracking with sub-cent accuracy via autocorrelation / YIN frequency estimation.
+- Target bend intervals: Half-Step (+100¢), Full-Step (+200¢), 1.5-Step (+300¢), and microtonal blues curls (+50¢).
+- **Hold-to-Pass Validation:** Requires maintaining the bend inside the &plusmn;10¢ target window for 750ms to build muscular fretboard memory, complete with audible harmonic chime and streak counter.
+
+### 15. #59 Closed-Loop Intonation Diagnostic (`/tools/intonation-diagnostic/`)
+- Sub-cent pitch comparison comparing open string fundamental vs. 12th-fret fretted pitch across all 6 strings.
+- Physical bridge screwdriver directions: alerts when to lengthen the string (move saddle backward away from neck) or shorten the string (move saddle forward toward neck).
+- Dedicated profiles for Strat/Tele 6-saddle bridges, Gibson Tune-o-matic bridges, and vintage 3-saddle bridges.
+
+### 16. #3 Passive Practice Auto-Logger & Wrapped (`/tools/practice-logger/`)
+- Passive acoustic practice monitor that distinguishes active instrument playing from ambient noise and conversation.
+- Measures true active fretting/plucking time vs. idle rest time.
+- 4-week GitHub-style practice calendar heatmap and an automated **Guitarist Wrapped** monthly summary.
+
+### 17. #49 On-Instrument Ear Trainer (`/tools/on-instrument-ear-trainer/`)
+- Interactive call-and-response ear training engine.
+- Synthesizes plucked guitar tones via Web Audio API physical modeling (plucked string decay filter and harmonics).
+- Tests interval recognition (Major 3rd, Perfect 4th, Perfect 5th, Octave), pentatonic phrases, and chord qualities.
+
+### 18. #89 Procedural Generated Backing Tracks (`/tools/backing-track-generator/`)
+- Zero-audio-sample procedural rhythm band generator built on Web Audio API oscillators and noise generators.
+- Generates kick, snare, hi-hats, walking bass lines, and rhythm chords across styles: 12-Bar Blues Shuffle, Slow Rock, and Jazz II-V-I.
+- Live 4-beat bar visualizer, chord progression display, and tempo adjustment (60–180 BPM).
+
+### 19. #194 Guitar → Tab on Your Own Takes (`/tools/guitar-to-tab/`)
+- Monophonic and polyphonic guitar take transcriber that turns live audio takes into editable 6-string ASCII guitar tablature.
+- Fretboard box heuristics that constrain notes within a 4-fret span to avoid unplayable left-hand stretches.
+- Single-click clipboard copy and `.txt` file export.
+
+### 20. #27 Public-Domain Guitar Songbook & Player (`/tools/pd-songbook-generator/`)
+- Curated library of 100% legal, out-of-copyright classical studies and traditional melodies (Fernando Sor Op. 60, Matteo Carcassi Etude, Greensleeves).
+- Built-in acoustic playback synthesizer with note-by-note tempo tracking.
+- Single-click printable sheet music formatting (`window.print()`).
+
 ---
 
 1. **€0 Budget:** Built exclusively with open-source tools, free hosting tiers, and on-device processing. No paid APIs, cloud GPUs, domains, or app-store fees.
