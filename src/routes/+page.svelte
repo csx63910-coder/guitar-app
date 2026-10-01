@@ -72,11 +72,11 @@
     <div class="stats-grid">
       <div class="stat-card">
         <span class="stat-val">{liveCount}</span>
-        <span class="stat-label">Live Tool (#131)</span>
+        <span class="stat-label">Live Tools Deployed</span>
       </div>
       <div class="stat-card">
-        <span class="stat-val">{plannedCount}</span>
-        <span class="stat-label">Planned in Ladder</span>
+        <span class="stat-val">20</span>
+        <span class="stat-label">Parked (€0 Hardware/BOM)</span>
       </div>
       <div class="stat-card">
         <span class="stat-val">100%</span>

@@ -93,7 +93,18 @@ describe('Tool Registry Validation', () => {
     expect(liveNumbers).toContain(5);   // Guitarist Weakness Radar & Skill Assessment
     expect(liveNumbers).toContain(109); // Rehearsal Audio Splitter & Song Marker
 
-    expect(liveTools.length).toBe(44);
+    // All 216 zero-budget buildable tools are live!
+    expect(liveTools.length).toBe(216);
+    expect(toolsList.length).toBe(216);
+  });
+
+  it('verifies all 20 parked ideas are excluded from buildable ladder', () => {
+    const parkedNumbers = [46, 47, 71, 91, 121, 141, 142, 157, 159, 160, 161, 162, 164, 167, 168, 203, 208, 217, 228, 38];
+    const registeredNumbers = new Set(toolsList.map((t) => t.number));
+
+    for (const parkedNum of parkedNumbers) {
+      expect(registeredNumbers.has(parkedNum)).toBe(false);
+    }
   });
 });
 
