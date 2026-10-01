@@ -8,7 +8,7 @@ The project follows a **Website-First** architecture: one unified web hub that h
 
 ## 🎸 Live Applications in the Toolkit
 
-Guitar Toolkit features **all Tier 1 applications live, tested, and fully functional offline**:
+Guitar Toolkit features **26 applications live, tested, and fully functional offline** across utilities, maintenance, practice, audio DSP, and modeling:
 
 ### 1. #131 Repair Diagnostic Wizard (`/tools/repair-wizard/`)
 - Interactive decision-tree troubleshooter for guitar hardware problems.
@@ -114,6 +114,36 @@ Guitar Toolkit features **all Tier 1 applications live, tested, and fully functi
 - Curated library of 100% legal, out-of-copyright classical studies and traditional melodies (Fernando Sor Op. 60, Matteo Carcassi Etude, Greensleeves).
 - Built-in acoustic playback synthesizer with note-by-note tempo tracking.
 - Single-click printable sheet music formatting (`window.print()`).
+
+### 21. #64 Browser Amp Sim & Modular FX Chain (`/tools/browser-rig/`)
+- Pure Web Audio API guitar rig simulator with zero plugins or downloads required.
+- Reorderable modular signal chain: Compressor, Overdrive (soft-clipping hyperbolic tangent), Preamp / 3-Band Tonestack EQ, Modulation (Chorus/Flanger), Delay with tape echo feedback, and Cabinet IR Convolver simulation.
+- Shareable URL presets encoding the complete chain configuration.
+
+### 22. #180 Interactive Signal-Path Explainer (`/tools/signal-path-explainer/`)
+- Interactive drag-and-drop pedalboard topology simulator.
+- Demonstrates real-world audio consequences of pedal ordering (e.g. Wah before Fuzz vs. Fuzz before Wah, Reverb before Overdrive vs. Overdrive before Reverb).
+- Interactive A/B sound comparison audio synthesizer letting users hear exact tonal differences and buffer impedance loading effects.
+
+### 23. #175 Audio Interface Input Gain & Impedance Calibrator (`/tools/interface-calibrator/`)
+- Calibrated input level meter targeting the industry-standard -18 dBFS digital sweet spot for amp sims (Neural DSP, NAM, Helix Native).
+- Hardware database of popular audio interfaces (Focusrite Scarlett, Motu M2, Universal Audio Volt, SSL 2) with known Hi-Z input impedance and max dBu headroom ratings.
+- Real-time clipping warning and recommended gain knob settings.
+
+### 24. #118 Self-Grading Guitar Homework Studio (`/tools/homework-studio/`)
+- Exercise recording studio for students and teachers with metronome click-track sync.
+- Web Audio onset detector comparing note transients against expected beat grids (quarter, eighth, sixteenth notes).
+- Grades accuracy with timing jitter statistics, rushing/dragging metrics, and a printable PDF/print evaluation report card for teachers.
+
+### 25. #148 Daily Riff Streak & Speed Ladder (`/tools/daily-riff-streak/`)
+- Daily practice routine tracker featuring curated technical exercises and riffs (Alternate Picking, Legato Spider, Sweep Arpeggio).
+- Progressive speed ladder incrementing tempo (+5 BPM every N clean repetitions) up to target goal.
+- Real-time synthesized guitar audio preview and localStorage streak calendar counter.
+
+### 26. #188 ABX Double-Blind Audio Testing Rack (`/tools/abx-blind-test/`)
+- Scientific double-blind listening test station for guitar tone comparisons (e.g. 96 kHz vs 48 kHz, Tube vs Digital Sim, True Bypass vs Buffered Cable).
+- Randomized 10-trial test rack where X is randomly assigned to sample A or B per trial.
+- Real-time binomial distribution p-value calculator determining whether listener preferences are statistically significant or indistinguishable from random guessing.
 
 ---
 

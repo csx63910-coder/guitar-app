@@ -63,7 +63,15 @@ describe('Tool Registry Validation', () => {
     expect(liveNumbers).toContain(194); // Guitar to Tab
     expect(liveNumbers).toContain(27);  // PD Songbook Generator
 
-    expect(liveTools.length).toBe(20);
+    // Advanced & Social Master Tools
+    expect(liveNumbers).toContain(64);  // Browser Amp Sim & Modular FX Chain
+    expect(liveNumbers).toContain(180); // Interactive Signal-Path Explainer
+    expect(liveNumbers).toContain(175); // Audio Interface Input Gain Calibrator
+    expect(liveNumbers).toContain(118); // Self-Grading Homework Studio
+    expect(liveNumbers).toContain(148); // Daily Riff Streak & Speed Ladder
+    expect(liveNumbers).toContain(188); // ABX Double-Blind Audio Testing Rack
+
+    expect(liveTools.length).toBe(26);
   });
 });
 

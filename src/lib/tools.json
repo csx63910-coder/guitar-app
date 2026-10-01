@@ -258,5 +258,83 @@
     "tags": ["presets", "helix", "quad cortex", "kemper", "conversion"],
     "route": "/tools/preset-portability-hub",
     "timeToMvp": "2–4 weeks"
+  },
+  {
+    "id": "browser-rig",
+    "number": 64,
+    "name": "Browser Amp Sim & Modular FX Chain",
+    "description": "Full virtual rig in the browser with drag-and-drop pedals and shareable preset URLs.",
+    "status": "live",
+    "tier": "Tier 3: Real DSP",
+    "difficulty": "Intermediate",
+    "category": "Tone & Gear",
+    "tags": ["pedalboard", "fx chain", "amp sim", "presets", "dsp"],
+    "route": "/tools/browser-rig",
+    "timeToMvp": "2–3 weeks"
+  },
+  {
+    "id": "signal-path-explainer",
+    "number": 180,
+    "name": "Interactive Signal-Path Explainer",
+    "description": "Hear and see why pedal order matters: Wah vs. Fuzz, Reverb pre/post Drive, and FX loop routing.",
+    "status": "live",
+    "tier": "Tier 1: Pure Logic",
+    "difficulty": "Beginner",
+    "category": "Tone & Gear",
+    "tags": ["signal path", "pedals", "impedance", "fuzz", "effects loop"],
+    "route": "/tools/signal-path-explainer",
+    "timeToMvp": "1 week"
+  },
+  {
+    "id": "interface-calibrator",
+    "number": 175,
+    "name": "Audio Interface Input Gain & Impedance Calibrator",
+    "description": "Knob padding and input calibration for Focusrite, Apollo, and MOTU to hit standard -18.0 dBFS sweet spots.",
+    "status": "live",
+    "tier": "Tier 1: Pure Logic",
+    "difficulty": "Beginner",
+    "category": "Tone & Gear",
+    "tags": ["calibration", "interface", "gain", "hi-z", "headroom"],
+    "route": "/tools/interface-calibrator",
+    "timeToMvp": "1 week"
+  },
+  {
+    "id": "homework-studio",
+    "number": 118,
+    "name": "Self-Grading Guitar Homework Studio",
+    "description": "Students record assignments against click tracks; automatically grades timing and generates instructor reports.",
+    "status": "live",
+    "tier": "Tier 2: Light Audio",
+    "difficulty": "Intermediate",
+    "category": "Practice & Learning",
+    "tags": ["teaching", "grading", "metronome", "homework", "b2b"],
+    "route": "/tools/homework-studio",
+    "timeToMvp": "2–3 weeks"
+  },
+  {
+    "id": "daily-riff-streak",
+    "number": 148,
+    "name": "Daily Riff Streak & Speed Ladder",
+    "description": "Daily riff challenge with progressive 50%-110% speed training and streak habit retention.",
+    "status": "live",
+    "tier": "Tier 3: Real DSP",
+    "difficulty": "Beginner",
+    "category": "Practice & Learning",
+    "tags": ["daily riff", "streak", "speed", "metronome", "gamified"],
+    "route": "/tools/daily-riff-streak",
+    "timeToMvp": "1–2 weeks"
+  },
+  {
+    "id": "abx-blind-test",
+    "number": 188,
+    "name": "ABX Double-Blind Audio Testing Rack",
+    "description": "Scientific double-blind audio comparator with exact binomial p-value statistics to settle tone debates.",
+    "status": "live",
+    "tier": "Tier 3: Real DSP",
+    "difficulty": "Beginner",
+    "category": "Ear & Timing",
+    "tags": ["abx", "blind test", "audio", "statistics", "science"],
+    "route": "/tools/abx-blind-test",
+    "timeToMvp": "1–2 weeks"
   }
 ]
