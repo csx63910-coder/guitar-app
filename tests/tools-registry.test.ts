@@ -71,7 +71,20 @@ describe('Tool Registry Validation', () => {
     expect(liveNumbers).toContain(148); // Daily Riff Streak & Speed Ladder
     expect(liveNumbers).toContain(188); // ABX Double-Blind Audio Testing Rack
 
-    expect(liveTools.length).toBe(26);
+    // Newly Built Expansion Tools
+    expect(liveNumbers).toContain(76);  // Interactive Guitar Wiring Diagram Generator
+    expect(liveNumbers).toContain(54);  // The "Listening" Metronome
+    expect(liveNumbers).toContain(85);  // Hum-to-Chords Idea Vault
+    expect(liveNumbers).toContain(31);  // YouTube Smart Practice Looper
+    expect(liveNumbers).toContain(63);  // "How Do I Get This Tone?" Recipe Finder
+    expect(liveNumbers).toContain(79);  // Complete Guitar Setup Wizard
+    expect(liveNumbers).toContain(53);  // Pocket & Groove Scoring Engine
+    expect(liveNumbers).toContain(13);  // Fretboard Memory Palace
+    expect(liveNumbers).toContain(35);  // Fretboard Chart Simplifier
+    expect(liveNumbers).toContain(137); // Luthier Workbench Toolkit
+    expect(liveNumbers).toContain(119); // Student Repertoire & Progress Roadmap
+
+    expect(liveTools.length).toBe(37);
   });
 });
 

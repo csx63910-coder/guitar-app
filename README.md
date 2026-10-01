@@ -8,7 +8,7 @@ The project follows a **Website-First** architecture: one unified web hub that h
 
 ## 🎸 Live Applications in the Toolkit
 
-Guitar Toolkit features **26 applications live, tested, and fully functional offline** across utilities, maintenance, practice, audio DSP, and modeling:
+Guitar Toolkit features **37 applications live, tested, and fully functional offline** across utilities, maintenance, practice, audio DSP, and modeling:
 
 ### 1. #131 Repair Diagnostic Wizard (`/tools/repair-wizard/`)
 - Interactive decision-tree troubleshooter for guitar hardware problems.
@@ -144,6 +144,60 @@ Guitar Toolkit features **26 applications live, tested, and fully functional off
 - Scientific double-blind listening test station for guitar tone comparisons (e.g. 96 kHz vs 48 kHz, Tube vs Digital Sim, True Bypass vs Buffered Cable).
 - Randomized 10-trial test rack where X is randomly assigned to sample A or B per trial.
 - Real-time binomial distribution p-value calculator determining whether listener preferences are statistically significant or indistinguishable from random guessing.
+
+### 27. #76 Interactive Guitar Wiring Diagram Generator (`/tools/wiring-diagrams/`)
+- Interactive schematics for Stratocaster (5-Way), Telecaster 4-Way Series Mod, Les Paul 50s Vintage Wiring, Humbucker Coil-Split, and Treble Bleed Networks.
+- Interactive switch position simulator highlighting active pickups and signal routes on color-coded SVG diagrams.
+- 4-conductor pickup wire color code matrix (Seymour Duncan, DiMarzio, Gibson, Fender, Bare Knuckle) and printable bill of materials.
+
+### 28. #54 The "Listening" Metronome (`/tools/listening-metronome/`)
+- Web Audio onset detector monitoring live guitar timing against tempo grids.
+- Automatically mutes its click once you lock into the pocket (&plusmn;35ms to &plusmn;50ms tolerance) to build internal pulse.
+- Clicks back on the moment you drift early or late, alerting you to rushing vs. dragging.
+
+### 29. #85 Hum-to-Chords Idea Vault (`/tools/hum-to-chords/`)
+- Transcribes hummed, whistled, or sung vocal melodies in real-time via autocorrelation pitch tracking.
+- Generates 4 matching guitar chord progressions (Pop/Folk, Neo-Soul 9ths, Cinematic Minor, Modal Loops).
+- Web Audio pluck synthesizer preview playing the melody layered on top of the chord progressions.
+
+### 30. #31 YouTube Smart Practice Looper (`/tools/youtube-looper/`)
+- Official YouTube iframe player integration with seamless one-click A/B micro-looping.
+- Pitch-preserved speed controls (50%, 65%, 75%, 85%, 100%, 115%) and fine-grained &plusmn;0.1s / &plusmn;0.5s loop nudging.
+- Save measure bookmarks with practice notes and use hands-on keyboard shortcuts (Space, [, ], L, R).
+
+### 31. #63 "How Do I Get This Tone?" Recipe Finder (`/tools/tone-recipe-finder/`)
+- Exact blueprints for iconic recorded guitar tones (David Gilmour, Stevie Ray Vaughan, Eddie Van Halen, The Edge, John Mayer).
+- Provides exact guitar pickup positions, amp tone-stack knobs (Gain, Bass, Mid, Treble, Presence), and pedal chain sequences with luthier secret sauce.
+- Built-in Web Audio distortion/delay tone audition synthesizer.
+
+### 32. #79 Complete Guitar Setup Wizard (`/tools/setup-wizard/`)
+- Step-by-step diagnostic guide executing the mandatory luthier order of operations: Neck Relief &rarr; Action &rarr; Intonation &rarr; Pickups.
+- Household measurement guides (business card, credit card, guitar picks) with exact truss rod wrench specs and saddle turn directions.
+- Printable bench work order sheet.
+
+### 33. #53 Pocket & Groove Scoring Engine (`/tools/groove-scoring/`)
+- Analyzes micro-timing variance in milliseconds across straight, laid-back (+25ms), and pushed (-18ms) rhythm styles.
+- Quantitative Pocket Index (0–100) scoring timing consistency and feel classification (Deep Pocket vs. Jitter vs. Dragging).
+- Real-time deviation scatterplot timeline.
+
+### 34. #13 Fretboard Memory Palace (`/tools/fretboard-memory/`)
+- Spaced-repetition fretboard memorization trainer on an interactive 22-fret rosewood fretboard with bone nut and fret wire styling.
+- 60-second rapid-fire sprint challenge and untimed free exploration modes.
+- Physical pluck audio synthesis playing the exact pitch of any clicked fret or correct answer.
+
+### 35. #35 Fretboard Chart Simplifier (`/tools/chart-simplifier/`)
+- Converts complex jazz and altered chords (maj9, 13, m7b5) into effortless 3-note Freddie Green shell voicings (Root, 3rd, 7th).
+- SVG chord box diagrams with muted string indicators and finger numbers.
+- Built-in strum audio synthesis.
+
+### 36. #137 Luthier Workbench Toolkit (`/tools/luthier-workbench/`)
+- 12-TET scale length fret placement calculator generating exact nut-to-fret and step measurements to 0.001" and 0.01mm.
+- Printable 1:1 scale under-string radius gauges (7.25", 9.5", 12", 14", 16").
+- Precision nut slot depth specs and 3rd fret depress tap tests.
+
+### 37. #119 Student Repertoire & Progress Roadmap (`/tools/student-roadmap/`)
+- Private guitar teacher roster manager with skill proficiency radar (open chords, barre chords, picking, pentatonics).
+- Repertoire progress tracker (Learning &rarr; Polishing &rarr; Mastered) and weekly practice homework assignment logger with printable assignment sheets.
 
 ---
 
